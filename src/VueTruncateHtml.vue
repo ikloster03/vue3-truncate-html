@@ -10,6 +10,7 @@
       {{ isTruncated ? truncatedHtmlOrText : text }}
     </div>
     <button
+      v-if="showButton"
       :class="[classes.button, isTruncated ? classes.buttonMore : classes.buttonLess]"
       @click.prevent="toggle">
       {{ isTruncated ? buttons.more : buttons.less }}
@@ -97,6 +98,8 @@ export default defineComponent({
       return text.length;
     });
 
+    const showButton = computed(() => textLength.value > props.length);
+
     const sanitizedHtmlOrText = computed(() => (
       isHTML.value
         ? sanitizeHtml(props.text, props.sanitizeOptions)
@@ -113,7 +116,7 @@ export default defineComponent({
     };
 
     return {
-      isTruncated, isHTML, textLength, truncatedHtmlOrText, toggle,
+      isTruncated, isHTML, textLength, showButton, truncatedHtmlOrText, toggle,
     };
   },
 });
