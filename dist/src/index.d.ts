@@ -1,2 +1,1 @@
-import VueTruncateHtml from './VueTruncateHtml.vue';
-export { VueTruncateHtml };
+export { default as VueTruncateHtml } from './VueTruncateHtml.vue';
