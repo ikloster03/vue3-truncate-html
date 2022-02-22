@@ -29,7 +29,7 @@ var __objRest = (source, exclude) => {
     }
   return target2;
 };
-import { defineComponent, computed, openBlock, createElementBlock, normalizeClass, toDisplayString, createElementVNode, withModifiers } from "vue";
+import { defineComponent, computed, openBlock, createElementBlock, normalizeClass, toDisplayString, withModifiers, createCommentVNode } from "vue";
 var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
 function getAugmentedNamespace(n) {
   if (n.__esModule)
@@ -12158,6 +12158,7 @@ const _sfc_main = defineComponent({
       const text = isHTML.value ? props.text.replace(/<[^>]*>/g, "") : props.text;
       return text.length;
     });
+    const showButton = computed(() => textLength.value > props.length);
     const sanitizedHtmlOrText = computed(() => isHTML.value ? sanitizeHtml$1(props.text, props.sanitizeOptions) : props.text);
     const truncatedHtmlOrText = computed(() => isHTML.value ? truncate_1(sanitizedHtmlOrText.value, props.length) : sanitizedHtmlOrText.value.substring(0, props.length));
     const toggle = () => {
@@ -12167,6 +12168,7 @@ const _sfc_main = defineComponent({
       isTruncated,
       isHTML,
       textLength,
+      showButton,
       truncatedHtmlOrText,
       toggle
     };
@@ -12184,10 +12186,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       key: 1,
       class: normalizeClass([_ctx.classes.content, _ctx.classes.contentText])
     }, toDisplayString(_ctx.isTruncated ? _ctx.truncatedHtmlOrText : _ctx.text), 3)),
-    createElementVNode("button", {
+    _ctx.showButton ? (openBlock(), createElementBlock("button", {
+      key: 2,
       class: normalizeClass([_ctx.classes.button, _ctx.isTruncated ? _ctx.classes.buttonMore : _ctx.classes.buttonLess]),
       onClick: _cache[0] || (_cache[0] = withModifiers((...args) => _ctx.toggle && _ctx.toggle(...args), ["prevent"]))
-    }, toDisplayString(_ctx.isTruncated ? _ctx.buttons.more : _ctx.buttons.less), 3)
+    }, toDisplayString(_ctx.isTruncated ? _ctx.buttons.more : _ctx.buttons.less), 3)) : createCommentVNode("", true)
   ]);
 }
 var VueTruncateHtml = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);

@@ -56,6 +56,7 @@ declare const _default: import("vue").DefineComponent<{
     isTruncated: import("vue").WritableComputedRef<boolean>;
     isHTML: import("vue").ComputedRef<boolean>;
     textLength: import("vue").ComputedRef<number>;
+    showButton: import("vue").ComputedRef<boolean>;
     truncatedHtmlOrText: import("vue").ComputedRef<string>;
     toggle: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
