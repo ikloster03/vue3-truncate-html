@@ -1,6 +1,6 @@
 {
   "name": "vue3-truncate-html",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A simple Vue 3 component that's truncate your text.",
   "repository": "https://github.com/ikloster03/vue3-truncate-html",
   "author": "Ivan Monastyrev <ikloster@yandex.ru>",
