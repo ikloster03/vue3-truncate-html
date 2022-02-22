@@ -24,7 +24,7 @@
     "serve": "vitepress serve docs",
     "build:library": "vite build",
     "analyze": "vite build --config analyze.config.js",
-    "publish:library": "npm publish --access public",
+    "publish:library": "npm publish",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore --fix src",
     "test": "jest src",
     "test:watch": "jest src -i --watchAll",
