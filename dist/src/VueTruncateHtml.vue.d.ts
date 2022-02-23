@@ -6,6 +6,7 @@ declare type Buttons = {
     less: string;
 };
 declare type Classes = {
+    container: string;
     content: string;
     contentHtml: string;
     contentText: string;
@@ -16,7 +17,7 @@ declare type Classes = {
 declare const _default: import("vue").DefineComponent<{
     modelValue: {
         type: BooleanConstructor;
-        default: boolean;
+        required: true;
     };
     text: {
         type: StringConstructor;
@@ -26,27 +27,21 @@ declare const _default: import("vue").DefineComponent<{
         type: NumberConstructor;
         default: number;
     };
+    hideButton: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     type: {
         type: PropType<Type>;
         default: string;
     };
     buttons: {
         type: PropType<Buttons>;
-        default: () => {
-            more: string;
-            less: string;
-        };
+        default: () => Buttons;
     };
     classes: {
         type: PropType<Classes>;
-        default: () => {
-            content: string;
-            contentHtml: string;
-            contentText: string;
-            button: string;
-            buttonMore: string;
-            buttonLess: string;
-        };
+        default: () => Classes;
     };
     sanitizeOptions: {
         type: PropType<sanitizeHtml.IOptions>;
@@ -62,7 +57,7 @@ declare const _default: import("vue").DefineComponent<{
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     modelValue: {
         type: BooleanConstructor;
-        default: boolean;
+        required: true;
     };
     text: {
         type: StringConstructor;
@@ -72,27 +67,21 @@ declare const _default: import("vue").DefineComponent<{
         type: NumberConstructor;
         default: number;
     };
+    hideButton: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     type: {
         type: PropType<Type>;
         default: string;
     };
     buttons: {
         type: PropType<Buttons>;
-        default: () => {
-            more: string;
-            less: string;
-        };
+        default: () => Buttons;
     };
     classes: {
         type: PropType<Classes>;
-        default: () => {
-            content: string;
-            contentHtml: string;
-            contentText: string;
-            button: string;
-            buttonMore: string;
-            buttonLess: string;
-        };
+        default: () => Classes;
     };
     sanitizeOptions: {
         type: PropType<sanitizeHtml.IOptions>;
@@ -103,8 +92,8 @@ declare const _default: import("vue").DefineComponent<{
 }, {
     text: string;
     length: number;
-    modelValue: boolean;
     type: Type;
+    hideButton: boolean;
     buttons: Buttons;
     classes: Classes;
     sanitizeOptions: sanitizeHtml.IOptions;
