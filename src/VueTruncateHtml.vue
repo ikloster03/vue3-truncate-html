@@ -1,5 +1,5 @@
 <template>
-  <div class="vue-truncate-html">
+  <div :class="classes.container">
     <div
       v-if="isHTML"
       :class="[classes.content, classes.contentHtml]"
@@ -33,6 +33,7 @@ type Buttons = {
 }
 
 type Classes = {
+  container: string
   content: string
   contentHtml: string
   contentText: string
@@ -70,6 +71,7 @@ export default defineComponent({
     classes: {
       type: Object as PropType<Classes>,
       default: () => ({
+        container: 'vue-truncate-html',
         content: 'vue-truncate-html__content',
         contentHtml: 'vue-truncate-html__content_html',
         contentText: 'vue-truncate-html__content_text',
