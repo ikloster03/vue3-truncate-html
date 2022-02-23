@@ -7,8 +7,8 @@
 | `length`          | number            | Length of the text or HTML after truncate. | -                    | `100`       |
 | `type`            | string (Type)     | Text or html                               | `text` or `html`     | `text`      |
 | `buttons`         | object (Buttons)  | Read More / Show Less                      | type `Buttons`       | <pre> { <br>    more: 'Read More', <br>    less: 'Show Less' <br> } </pre> |
-| `classes`         | object (Classes)  | HTML's disabled attribute                  | type `Classes`       | <pre> { <br>    content: 'vue-truncate-html__content', <br>    contentHtml: 'vue-truncate-html__content_html', <br>    contentText: 'vue-truncate-html__content_text', <br>    button: 'vue-truncate-html__button', <br>    buttonMore: 'vue-truncate-html__button_more', <br>    buttonLess: 'vue-truncate-html__button_less', <br> } </pre> |
-| `sanitizeOptions` | object (IOptions) | HTML's disabled attribute                  | interface `IOptions` | [Show IOptions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/sanitize-html/index.d.ts#L54)     |
+| `classes`         | object (Classes)  | All css classes                            | type `Classes`       | <pre> { <br>    container: 'vue-truncate-html', <br>    content: 'vue-truncate-html__content', <br>    contentHtml: 'vue-truncate-html__content_html', <br>    contentText: 'vue-truncate-html__content_text', <br>    button: 'vue-truncate-html__button', <br>    buttonMore: 'vue-truncate-html__button_more', <br>    buttonLess: 'vue-truncate-html__button_less', <br> } </pre> |
+| `sanitizeOptions` | object (IOptions) | Options for HTML sanitizing                | interface `IOptions` | [Show IOptions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/sanitize-html/index.d.ts#L54)     |
 
 | Event               | Description               | Parameters    |
 | :------------------ | :------------------------ | :------------ |
