@@ -72,6 +72,10 @@ export default defineComponent({
       type: Number,
       default: 100,
     },
+    hideButton: {
+      type: Boolean,
+      default: false,
+    },
     type: {
       type: String as PropType<Type>,
       default: 'text',
@@ -104,7 +108,7 @@ export default defineComponent({
       return text.length;
     });
 
-    const showButton = computed(() => textLength.value > props.length);
+    const showButton = computed(() => !props.hideButton && textLength.value > props.length);
 
     const sanitizedHtmlOrText = computed(() => (
       isHTML.value
