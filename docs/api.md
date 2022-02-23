@@ -5,6 +5,7 @@
 | `modelValue`      | boolean           | HTML's disabled attribute                  | `true` or `false`    | `false`     |
 | `text`            | string            | The text or HTML that will be truncated    | -                    | `''`        |
 | `length`          | number            | Length of the text or HTML after truncate. | -                    | `100`       |
+| `hideButton`      | boolean           | It can force hide button more/less         | `true` or `false`    | `false`     |
 | `type`            | string (Type)     | Text or html                               | `text` or `html`     | `text`      |
 | `buttons`         | object (Buttons)  | Read More / Show Less                      | type `Buttons`       | <pre> { <br>    more: 'Read More', <br>    less: 'Show Less' <br> } </pre> |
 | `classes`         | object (Classes)  | All css classes                            | type `Classes`       | <pre> { <br>    container: 'vue-truncate-html', <br>    content: 'vue-truncate-html__content', <br>    contentHtml: 'vue-truncate-html__content_html', <br>    contentText: 'vue-truncate-html__content_text', <br>    button: 'vue-truncate-html__button', <br>    buttonMore: 'vue-truncate-html__button_more', <br>    buttonLess: 'vue-truncate-html__button_less', <br> } </pre> |
