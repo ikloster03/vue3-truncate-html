@@ -1,14 +1,15 @@
 module.exports = {
   testEnvironment: 'jsdom',
   moduleFileExtensions: [
+    'ts',
     'js',
     'json',
     'vue',
   ],
   transform: {
-    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
     '^.+\\.js$': 'babel-jest',
     '^.+\\.vue$': '@vue/vue3-jest',
+    '^.+\\.ts$': 'ts-jest',
   },
   transformIgnorePatterns: ['/node_modules/'],
   moduleNameMapper: {
@@ -22,7 +23,7 @@ module.exports = {
   ],
   collectCoverage: true,
   collectCoverageFrom: [
-    'src/**/*.{js,vue}',
-    '!src/main.js',
+    'src/**/*.{ts,js,vue}',
+    '!src/index.ts',
   ],
 };
