@@ -4,12 +4,12 @@ module.exports = {
     es2021: true,
     'vue/setup-compiler-macros': true,
     jest: true,
-    "node": true,
+    node: true,
   },
   extends: [
     'plugin:vue/vue3-recommended',
     'airbnb-base',
-    '@vue/typescript/recommended'
+    '@vue/typescript/recommended',
   ],
   parserOptions: {
     ecmaVersion: 12,
