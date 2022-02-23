@@ -23,8 +23,6 @@ import { computed, defineComponent, PropType } from 'vue';
 import htmlTruncate from 'html-truncate';
 import sanitizeHtml, { IOptions } from 'sanitize-html';
 
-const [, HTML] = ['text', 'html'];
-
 type Type = 'text' | 'html';
 
 type Buttons = {
@@ -41,6 +39,23 @@ type Classes = {
   buttonMore: string
   buttonLess: string
 }
+
+const [, HTML] = ['text', 'html'];
+
+const defaultClasses: Classes = {
+  container: 'vue-truncate-html',
+  content: 'vue-truncate-html__content',
+  contentHtml: 'vue-truncate-html__content_html',
+  contentText: 'vue-truncate-html__content_text',
+  button: 'vue-truncate-html__button',
+  buttonMore: 'vue-truncate-html__button_more',
+  buttonLess: 'vue-truncate-html__button_less',
+};
+
+const defaultButtons: Buttons = {
+  more: 'Read More',
+  less: 'Show Less',
+};
 
 export default defineComponent({
   name: 'VueTruncateHtml',
@@ -63,22 +78,11 @@ export default defineComponent({
     },
     buttons: {
       type: Object as PropType<Buttons>,
-      default: () => ({
-        more: 'Read More',
-        less: 'Show Less',
-      }),
+      default: () => defaultButtons,
     },
     classes: {
       type: Object as PropType<Classes>,
-      default: () => ({
-        container: 'vue-truncate-html',
-        content: 'vue-truncate-html__content',
-        contentHtml: 'vue-truncate-html__content_html',
-        contentText: 'vue-truncate-html__content_text',
-        button: 'vue-truncate-html__button',
-        buttonMore: 'vue-truncate-html__button_more',
-        buttonLess: 'vue-truncate-html__button_less',
-      }),
+      default: () => defaultClasses,
     },
     sanitizeOptions: {
       type: Object as PropType<IOptions>,
