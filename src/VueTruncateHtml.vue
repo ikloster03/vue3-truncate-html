@@ -47,7 +47,7 @@ export default defineComponent({
   props: {
     modelValue: {
       type: Boolean,
-      default: true,
+      required: true,
     },
     text: {
       type: String,
