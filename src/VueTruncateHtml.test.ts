@@ -1,6 +1,8 @@
 import { mount } from '@vue/test-utils';
-
+import { axe, toHaveNoViolations } from 'jest-axe';
 import VueTruncateHtml from './VueTruncateHtml.vue';
+
+expect.extend(toHaveNoViolations);
 
 const TEXT = `
       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -54,6 +56,16 @@ it('renders correctly', () => {
   const wrapper = mount(textComponentCase);
 
   expect(wrapper.element).toMatchSnapshot();
+});
+
+it('a11y is ok', async () => {
+  const wrapper = mount(textComponentCase);
+
+  expect(await axe(wrapper.element, {
+    rules: {
+      region: { enabled: false },
+    },
+  })).toHaveNoViolations();
 });
 
 test('mount with text', async () => {
@@ -142,3 +154,19 @@ test('type text, real text is html', async () => {
 
   expect(wrapper.find('.vue-truncate-html__content_text').exists()).toBe(true);
 });
+//
+// test('change more/less name', async () => {
+//   expect(false).toBe(true);
+// });
+//
+// test('custom button more/less with slot', async () => {
+//   expect(false).toBe(true);
+// });
+//
+// test('custom classes', async () => {
+//   expect(false).toBe(true);
+// });
+//
+// test('custom sanitize options', async () => {
+//   expect(false).toBe(true);
+// });
