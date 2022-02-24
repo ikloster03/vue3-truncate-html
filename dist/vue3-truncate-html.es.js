@@ -29,7 +29,7 @@ var __objRest = (source, exclude) => {
     }
   return target2;
 };
-import { defineComponent, computed, openBlock, createElementBlock, normalizeClass, toDisplayString, withModifiers, createCommentVNode } from "vue";
+import { defineComponent, computed, openBlock, createElementBlock, normalizeClass, toDisplayString, renderSlot, withModifiers, createCommentVNode } from "vue";
 var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
 function getAugmentedNamespace(n) {
   if (n.__esModule)
@@ -12194,11 +12194,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       key: 1,
       class: normalizeClass([_ctx.classes.content, _ctx.classes.contentText])
     }, toDisplayString(_ctx.isTruncated ? _ctx.truncatedHtmlOrText : _ctx.text), 3)),
-    _ctx.showButton ? (openBlock(), createElementBlock("button", {
-      key: 2,
-      class: normalizeClass([_ctx.classes.button, _ctx.isTruncated ? _ctx.classes.buttonMore : _ctx.classes.buttonLess]),
-      onClick: _cache[0] || (_cache[0] = withModifiers((...args) => _ctx.toggle && _ctx.toggle(...args), ["prevent"]))
-    }, toDisplayString(_ctx.isTruncated ? _ctx.buttons.more : _ctx.buttons.less), 3)) : createCommentVNode("", true)
+    renderSlot(_ctx.$slots, "default", {}, () => [
+      _ctx.showButton ? (openBlock(), createElementBlock("button", {
+        key: 0,
+        class: normalizeClass([_ctx.classes.button, _ctx.isTruncated ? _ctx.classes.buttonMore : _ctx.classes.buttonLess]),
+        onClick: _cache[0] || (_cache[0] = withModifiers((...args) => _ctx.toggle && _ctx.toggle(...args), ["prevent"]))
+      }, toDisplayString(_ctx.isTruncated ? _ctx.buttons.more : _ctx.buttons.less), 3)) : createCommentVNode("", true)
+    ])
   ], 2);
 }
 var VueTruncateHtml = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
