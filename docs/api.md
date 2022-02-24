@@ -15,6 +15,10 @@
 | :------------------ | :------------------------ | :------------ |
 | `update:modelValue` | Triggered on button click |               |
 
+| Slot      | Description                    |
+| :-------- | :----------------------------- |
+| `default` | Default slot for custom button |          
+
 
 ```vue
 <div class="vue-truncate-html-example">
