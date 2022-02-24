@@ -9,12 +9,14 @@
       :class="[classes.content, classes.contentText]">
       {{ isTruncated ? truncatedHtmlOrText : text }}
     </div>
-    <button
-      v-if="showButton"
-      :class="[classes.button, isTruncated ? classes.buttonMore : classes.buttonLess]"
-      @click.prevent="toggle">
-      {{ isTruncated ? buttons.more : buttons.less }}
-    </button>
+    <slot>
+      <button
+        v-if="showButton"
+        :class="[classes.button, isTruncated ? classes.buttonMore : classes.buttonLess]"
+        @click.prevent="toggle">
+        {{ isTruncated ? buttons.more : buttons.less }}
+      </button>
+    </slot>
   </div>
 </template>
 
