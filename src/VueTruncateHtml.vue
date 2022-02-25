@@ -14,7 +14,7 @@
         v-if="showButton"
         :class="[classes.button, isTruncated ? classes.buttonMore : classes.buttonLess]"
         @click.prevent="toggle">
-        {{ isTruncated ? buttons.more : buttons.less }}
+        {{ buttonTitle }}
       </button>
     </slot>
   </div>
@@ -123,12 +123,20 @@ export default defineComponent({
         : sanitizedHtmlOrText.value.substring(0, props.length)
     ));
 
+    const buttonTitle = computed(() => (isTruncated.value ? props.buttons.more ?? defaultButtons.more : props.buttons.less ?? defaultButtons.less));
+
     const toggle = () => {
       isTruncated.value = !isTruncated.value;
     };
 
     return {
-      isTruncated, isHTML, textLength, showButton, truncatedHtmlOrText, toggle,
+      isTruncated,
+      isHTML,
+      textLength,
+      showButton,
+      truncatedHtmlOrText,
+      buttonTitle,
+      toggle,
     };
   },
 });
