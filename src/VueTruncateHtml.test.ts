@@ -154,14 +154,129 @@ test('type text, real text is html', async () => {
 
   expect(wrapper.find('.vue-truncate-html__content_text').exists()).toBe(true);
 });
-//
-// test('change more/less name', async () => {
-//   expect(false).toBe(true);
-// });
-//
-// test('custom button more/less with slot', async () => {
-//   expect(false).toBe(true);
-// });
+
+test('change more/less name: full default', async () => {
+  const defaultButtons = {
+    more: 'Read More',
+    less: 'Show Less',
+  };
+
+  const buttons = {
+    // more: 'more_test',
+    // less: 'less_test',
+  };
+
+  const wrapper = mount({
+    ...textComponentCase,
+    data() {
+      return { isTruncated: true, text: TEXT, buttons };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="text" :buttons="buttons"></vue-truncate-html>',
+  });
+
+  expect(wrapper.find('.vue-truncate-html__button_more').text()).toBe(defaultButtons.more);
+
+  await wrapper.find('.vue-truncate-html__button').trigger('click');
+
+  expect(wrapper.find('.vue-truncate-html__button_less').text()).toBe(defaultButtons.less);
+});
+
+test('change more/less name: part default', async () => {
+  const defaultButtons = {
+    more: 'Read More',
+    less: 'Show Less',
+  };
+
+  const buttons = {
+    more: 'more_test',
+    // less: 'less_test',
+  };
+
+  const wrapper = mount({
+    ...textComponentCase,
+    data() {
+      return { isTruncated: true, text: TEXT, buttons };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="text" :buttons="buttons"></vue-truncate-html>',
+  });
+
+  expect(wrapper.find('.vue-truncate-html__button_more').text()).toBe(buttons.more);
+
+  await wrapper.find('.vue-truncate-html__button').trigger('click');
+
+  expect(wrapper.find('.vue-truncate-html__button_less').text()).toBe(defaultButtons.less);
+});
+
+test('change more/less name: part default 2', async () => {
+  const defaultButtons = {
+    more: 'Read More',
+    less: 'Show Less',
+  };
+
+  const buttons = {
+    // more: 'more_test',
+    less: 'less_test',
+  };
+
+  const wrapper = mount({
+    ...textComponentCase,
+    data() {
+      return { isTruncated: true, text: TEXT, buttons };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="text" :buttons="buttons"></vue-truncate-html>',
+  });
+
+  expect(wrapper.find('.vue-truncate-html__button_more').text()).toBe(defaultButtons.more);
+
+  await wrapper.find('.vue-truncate-html__button').trigger('click');
+
+  expect(wrapper.find('.vue-truncate-html__button_less').text()).toBe(buttons.less);
+});
+
+test('change more/less name', async () => {
+  const buttons = {
+    more: 'more_test',
+    less: 'less_test',
+  };
+
+  const wrapper = mount({
+    ...textComponentCase,
+    data() {
+      return { isTruncated: true, text: TEXT, buttons };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="text" :buttons="buttons"></vue-truncate-html>',
+  });
+
+  expect(wrapper.find('.vue-truncate-html__button_more').text()).toBe(buttons.more);
+
+  await wrapper.find('.vue-truncate-html__button').trigger('click');
+
+  expect(wrapper.find('.vue-truncate-html__button_less').text()).toBe(buttons.less);
+});
+
+test('custom button more/less with slot', async () => {
+  const wrapper = mount({
+    ...textComponentCase,
+    template: `
+        <vue-truncate-html v-model="isTruncated" :text="text" type="text">
+        <button
+            class="button-test"
+            :class="isTruncated ? 'button-test_more' : 'button-test_less'"
+            @click.prevent="isTruncated = !isTruncated">test</button>
+        </vue-truncate-html>
+`,
+  });
+
+  expect(wrapper.find('.button-test').exists()).toBe(true);
+
+  expect(wrapper.find('.button-test_more').exists()).toBe(true);
+  expect(wrapper.find('.button-test_less').exists()).toBe(false);
+
+  await wrapper.find('.button-test').trigger('click');
+
+  expect(wrapper.find('.button-test_more').exists()).toBe(false);
+  expect(wrapper.find('.button-test_less').exists()).toBe(true);
+});
 //
 // test('custom classes', async () => {
 //   expect(false).toBe(true);
