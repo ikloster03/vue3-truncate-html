@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import VueTruncateHtml from './VueTruncateHtml.vue';
+import { defaultClasses, defaultButtons } from './const';
 
 expect.extend(toHaveNoViolations);
 
@@ -155,12 +156,7 @@ test('type text, real text is html', async () => {
   expect(wrapper.find('.vue-truncate-html__content_text').exists()).toBe(true);
 });
 
-test('change more/less name: full default', async () => {
-  const defaultButtons = {
-    more: 'Read More',
-    less: 'Show Less',
-  };
-
+test('custom more/less name: full default', async () => {
   const buttons = {
     // more: 'more_test',
     // less: 'less_test',
@@ -181,12 +177,7 @@ test('change more/less name: full default', async () => {
   expect(wrapper.find('.vue-truncate-html__button_less').text()).toBe(defaultButtons.less);
 });
 
-test('change more/less name: part default', async () => {
-  const defaultButtons = {
-    more: 'Read More',
-    less: 'Show Less',
-  };
-
+test('custom more/less name: part default', async () => {
   const buttons = {
     more: 'more_test',
     // less: 'less_test',
@@ -207,12 +198,7 @@ test('change more/less name: part default', async () => {
   expect(wrapper.find('.vue-truncate-html__button_less').text()).toBe(defaultButtons.less);
 });
 
-test('change more/less name: part default 2', async () => {
-  const defaultButtons = {
-    more: 'Read More',
-    less: 'Show Less',
-  };
-
+test('custom more/less name: part default 2', async () => {
   const buttons = {
     // more: 'more_test',
     less: 'less_test',
@@ -233,7 +219,7 @@ test('change more/less name: part default 2', async () => {
   expect(wrapper.find('.vue-truncate-html__button_less').text()).toBe(buttons.less);
 });
 
-test('change more/less name', async () => {
+test('custom more/less name', async () => {
   const buttons = {
     more: 'more_test',
     less: 'less_test',
@@ -277,10 +263,119 @@ test('custom button more/less with slot', async () => {
   expect(wrapper.find('.button-test_more').exists()).toBe(false);
   expect(wrapper.find('.button-test_less').exists()).toBe(true);
 });
-//
-// test('custom classes', async () => {
-//   expect(false).toBe(true);
-// });
+
+test('custom classes: full default', async () => {
+  const classes = {
+  };
+
+  const wrapper = mount({
+    ...textComponentCase,
+    data() {
+      return { isTruncated: true, text: TEXT, classes };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="text" :classes="classes"></vue-truncate-html>',
+  });
+
+  expect(wrapper.find(`.${defaultClasses.container}`).exists()).toBe(true);
+  expect(wrapper.find(`.${defaultClasses.content}`).exists()).toBe(true);
+  expect(wrapper.find(`.${defaultClasses.contentText}`).exists()).toBe(true);
+  expect(wrapper.find(`.${defaultClasses.button}`).exists()).toBe(true);
+  expect(wrapper.find(`.${defaultClasses.buttonMore}`).exists()).toBe(true);
+
+  await wrapper.find(`.${defaultClasses.button}`).trigger('click');
+
+  expect(wrapper.find(`.${defaultClasses.buttonLess}`).exists()).toBe(true);
+
+  const wrapper2 = mount({
+    ...htmlComponentCase,
+    data() {
+      return { isTruncated: true, text: TEXT, classes };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="html" :classes="classes"></vue-truncate-html>',
+  });
+
+  expect(wrapper2.find(`.${defaultClasses.contentHtml}`).exists()).toBe(true);
+});
+
+test('custom classes: part custom', async () => {
+  const classes = {
+    container: 'truncate-test',
+    // content: 'truncate-test__content',
+    contentHtml: 'truncate-test__content_html',
+    // contentText: 'truncate-test__content_text',
+    button: 'truncate-test__button',
+    buttonMore: 'truncate-test__button_more',
+    // buttonLess: 'truncate-test__button_less',
+  };
+
+  const wrapper = mount({
+    ...textComponentCase,
+    data() {
+      return { isTruncated: true, text: TEXT, classes };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="text" :classes="classes"></vue-truncate-html>',
+  });
+
+  expect(wrapper.find(`.${classes.container}`).exists()).toBe(true);
+  expect(wrapper.find(`.${defaultClasses.content}`).exists()).toBe(true);
+  expect(wrapper.find(`.${defaultClasses.contentText}`).exists()).toBe(true);
+  expect(wrapper.find(`.${classes.button}`).exists()).toBe(true);
+  expect(wrapper.find(`.${classes.buttonMore}`).exists()).toBe(true);
+
+  await wrapper.find(`.${classes.button}`).trigger('click');
+
+  expect(wrapper.find(`.${defaultClasses.buttonLess}`).exists()).toBe(true);
+
+  const wrapper2 = mount({
+    ...htmlComponentCase,
+    data() {
+      return { isTruncated: true, text: TEXT, classes };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="html" :classes="classes"></vue-truncate-html>',
+  });
+
+  expect(wrapper2.find(`.${classes.contentHtml}`).exists()).toBe(true);
+});
+
+test('custom classes: full custom', async () => {
+  const classes = {
+    container: 'truncate-test',
+    content: 'truncate-test__content',
+    contentHtml: 'truncate-test__content_html',
+    contentText: 'truncate-test__content_text',
+    button: 'truncate-test__button',
+    buttonMore: 'truncate-test__button_more',
+    buttonLess: 'truncate-test__button_less',
+  };
+
+  const wrapper = mount({
+    ...textComponentCase,
+    data() {
+      return { isTruncated: true, text: TEXT, classes };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="text" :classes="classes"></vue-truncate-html>',
+  });
+
+  expect(wrapper.find(`.${classes.container}`).exists()).toBe(true);
+  expect(wrapper.find(`.${classes.content}`).exists()).toBe(true);
+  expect(wrapper.find(`.${classes.contentText}`).exists()).toBe(true);
+  expect(wrapper.find(`.${classes.button}`).exists()).toBe(true);
+  expect(wrapper.find(`.${classes.buttonMore}`).exists()).toBe(true);
+
+  await wrapper.find(`.${classes.button}`).trigger('click');
+
+  expect(wrapper.find(`.${classes.buttonLess}`).exists()).toBe(true);
+
+  const wrapper2 = mount({
+    ...htmlComponentCase,
+    data() {
+      return { isTruncated: true, text: TEXT, classes };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="html" :classes="classes"></vue-truncate-html>',
+  });
+
+  expect(wrapper2.find(`.${classes.contentHtml}`).exists()).toBe(true);
+});
 //
 // test('custom sanitize options', async () => {
 //   expect(false).toBe(true);
