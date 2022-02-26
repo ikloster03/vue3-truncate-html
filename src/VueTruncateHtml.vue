@@ -1,18 +1,18 @@
 <template>
-  <div :class="classes.container">
+  <div :class="proxyClasses.container">
     <div
       v-if="isHTML"
-      :class="[classes.content, classes.contentHtml]"
+      :class="[proxyClasses.content, proxyClasses.contentHtml]"
       v-html="isTruncated ? truncatedHtmlOrText : text" />
     <div
       v-else
-      :class="[classes.content, classes.contentText]">
+      :class="[proxyClasses.content, proxyClasses.contentText]">
       {{ isTruncated ? truncatedHtmlOrText : text }}
     </div>
     <slot>
       <button
         v-if="showButton"
-        :class="[classes.button, isTruncated ? classes.buttonMore : classes.buttonLess]"
+        :class="[proxyClasses.button, isTruncated ? proxyClasses.buttonMore : proxyClasses.buttonLess]"
         @click.prevent="toggle">
         {{ buttonTitle }}
       </button>
@@ -24,40 +24,8 @@
 import { computed, defineComponent, PropType } from 'vue';
 import htmlTruncate from 'html-truncate';
 import sanitizeHtml, { IOptions } from 'sanitize-html';
-
-type Type = 'text' | 'html';
-
-type Buttons = {
-  more: string
-  less: string
-}
-
-type Classes = {
-  container: string
-  content: string
-  contentHtml: string
-  contentText: string
-  button: string
-  buttonMore: string
-  buttonLess: string
-}
-
-const [, HTML] = ['text', 'html'];
-
-const defaultClasses: Classes = {
-  container: 'vue-truncate-html',
-  content: 'vue-truncate-html__content',
-  contentHtml: 'vue-truncate-html__content_html',
-  contentText: 'vue-truncate-html__content_text',
-  button: 'vue-truncate-html__button',
-  buttonMore: 'vue-truncate-html__button_more',
-  buttonLess: 'vue-truncate-html__button_less',
-};
-
-const defaultButtons: Buttons = {
-  more: 'Read More',
-  less: 'Show Less',
-};
+import { Classes, Buttons, Type } from './types';
+import { defaultClasses, defaultButtons, HTML } from './const';
 
 export default defineComponent({
   name: 'VueTruncateHtml',
@@ -123,7 +91,21 @@ export default defineComponent({
         : sanitizedHtmlOrText.value.substring(0, props.length)
     ));
 
-    const buttonTitle = computed(() => (isTruncated.value ? props.buttons.more ?? defaultButtons.more : props.buttons.less ?? defaultButtons.less));
+    const buttonTitle = computed(() => (
+      isTruncated.value
+        ? props.buttons.more ?? defaultButtons.more
+        : props.buttons.less ?? defaultButtons.less
+    ));
+
+    const proxyClasses = computed(() => ({
+      container: props.classes?.container ?? defaultClasses.container,
+      content: props.classes?.content ?? defaultClasses.content,
+      contentHtml: props.classes?.contentHtml ?? defaultClasses.contentHtml,
+      contentText: props.classes?.contentText ?? defaultClasses.contentText,
+      button: props.classes?.button ?? defaultClasses.button,
+      buttonMore: props.classes?.buttonMore ?? defaultClasses.buttonMore,
+      buttonLess: props.classes?.buttonLess ?? defaultClasses.buttonLess,
+    }));
 
     const toggle = () => {
       isTruncated.value = !isTruncated.value;
@@ -136,6 +118,7 @@ export default defineComponent({
       showButton,
       truncatedHtmlOrText,
       buttonTitle,
+      proxyClasses,
       toggle,
     };
   },
