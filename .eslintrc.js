@@ -60,19 +60,18 @@ module.exports = {
         jsx: 'never',
         ts: 'never',
         tsx: 'never',
-        vue: 'never',
         '': 'never',
       },
     ],
   },
   settings: {
-    'import/extensions': ['.js', '.jsx', '.ts', '.tsx', '.vue'],
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
     'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx', '.vue'],
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
     'import/resolver': {
       node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
   },
