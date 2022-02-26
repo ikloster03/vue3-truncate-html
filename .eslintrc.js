@@ -1,4 +1,13 @@
 module.exports = {
+  root: true,
+  ignorePatterns: [
+    'node_modules',
+    'dist',
+    'dist-ssr',
+    'package-lock.json',
+    'yarn.lock.json',
+    '*.local',
+  ],
   env: {
     browser: true,
     es2021: true,
@@ -11,9 +20,16 @@ module.exports = {
     'airbnb-base',
     '@vue/typescript/recommended',
   ],
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    ecmaVersion: 12,
+    ecmaFeatures: { impliedStrict: true },
+    ecmaVersion: 2021,
+    parser: '@typescript-eslint/parser',
     sourceType: 'module',
+    vueFeatures: {
+      filter: false,
+      interpolationAsNonHTML: true,
+    },
   },
   plugins: [
     'vue',
@@ -36,18 +52,29 @@ module.exports = {
       { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
     ],
     'max-len': ['warn', { code: 150 }],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+        vue: 'never',
+        '': 'never',
+      },
+    ],
   },
   settings: {
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx', '.vue'],
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx', '.vue'],
+    },
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
       },
-      alias: {
-        map: [
-          ['@', `${__dirname}/src`],
-        ],
-        extensions: ['.js', '.vue'],
-      },
     },
   },
+
 };
