@@ -1,19 +1,6 @@
 import { PropType } from 'vue';
 import sanitizeHtml from 'sanitize-html';
-declare type Type = 'text' | 'html';
-declare type Buttons = {
-    more: string;
-    less: string;
-};
-declare type Classes = {
-    container: string;
-    content: string;
-    contentHtml: string;
-    contentText: string;
-    button: string;
-    buttonMore: string;
-    buttonLess: string;
-};
+import { Classes, Buttons, Type } from './types';
 declare const _default: import("vue").DefineComponent<{
     modelValue: {
         type: BooleanConstructor;
@@ -54,6 +41,15 @@ declare const _default: import("vue").DefineComponent<{
     showButton: import("vue").ComputedRef<boolean>;
     truncatedHtmlOrText: import("vue").ComputedRef<string>;
     buttonTitle: import("vue").ComputedRef<string>;
+    proxyClasses: import("vue").ComputedRef<{
+        container: string;
+        content: string;
+        contentHtml: string;
+        contentText: string;
+        button: string;
+        buttonMore: string;
+        buttonLess: string;
+    }>;
     toggle: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     modelValue: {

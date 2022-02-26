@@ -12097,14 +12097,7 @@ sanitizeHtml.simpleTransform = function(newTagName, newAttribs, merge) {
   };
 };
 var sanitizeHtml$1 = sanitizeHtml_1;
-var _export_sfc = (sfc, props) => {
-  const target2 = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target2[key] = val;
-  }
-  return target2;
-};
-const [, HTML] = ["text", "html"];
+const [TEXT, HTML] = ["text", "html"];
 const defaultClasses = {
   container: "vue-truncate-html",
   content: "vue-truncate-html__content",
@@ -12117,6 +12110,13 @@ const defaultClasses = {
 const defaultButtons = {
   more: "Read More",
   less: "Show Less"
+};
+var _export_sfc = (sfc, props) => {
+  const target2 = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target2[key] = val;
+  }
+  return target2;
 };
 const _sfc_main = defineComponent({
   name: "VueTruncateHtml",
@@ -12172,6 +12172,18 @@ const _sfc_main = defineComponent({
       var _a, _b;
       return isTruncated.value ? (_a = props.buttons.more) != null ? _a : defaultButtons.more : (_b = props.buttons.less) != null ? _b : defaultButtons.less;
     });
+    const proxyClasses = computed(() => {
+      var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n;
+      return {
+        container: (_b = (_a = props.classes) == null ? void 0 : _a.container) != null ? _b : defaultClasses.container,
+        content: (_d = (_c = props.classes) == null ? void 0 : _c.content) != null ? _d : defaultClasses.content,
+        contentHtml: (_f = (_e = props.classes) == null ? void 0 : _e.contentHtml) != null ? _f : defaultClasses.contentHtml,
+        contentText: (_h = (_g = props.classes) == null ? void 0 : _g.contentText) != null ? _h : defaultClasses.contentText,
+        button: (_j = (_i = props.classes) == null ? void 0 : _i.button) != null ? _j : defaultClasses.button,
+        buttonMore: (_l = (_k = props.classes) == null ? void 0 : _k.buttonMore) != null ? _l : defaultClasses.buttonMore,
+        buttonLess: (_n = (_m = props.classes) == null ? void 0 : _m.buttonLess) != null ? _n : defaultClasses.buttonLess
+      };
+    });
     const toggle = () => {
       isTruncated.value = !isTruncated.value;
     };
@@ -12182,6 +12194,7 @@ const _sfc_main = defineComponent({
       showButton,
       truncatedHtmlOrText,
       buttonTitle,
+      proxyClasses,
       toggle
     };
   }
@@ -12189,20 +12202,20 @@ const _sfc_main = defineComponent({
 const _hoisted_1 = ["innerHTML"];
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
-    class: normalizeClass(_ctx.classes.container)
+    class: normalizeClass(_ctx.proxyClasses.container)
   }, [
     _ctx.isHTML ? (openBlock(), createElementBlock("div", {
       key: 0,
-      class: normalizeClass([_ctx.classes.content, _ctx.classes.contentHtml]),
+      class: normalizeClass([_ctx.proxyClasses.content, _ctx.proxyClasses.contentHtml]),
       innerHTML: _ctx.isTruncated ? _ctx.truncatedHtmlOrText : _ctx.text
     }, null, 10, _hoisted_1)) : (openBlock(), createElementBlock("div", {
       key: 1,
-      class: normalizeClass([_ctx.classes.content, _ctx.classes.contentText])
+      class: normalizeClass([_ctx.proxyClasses.content, _ctx.proxyClasses.contentText])
     }, toDisplayString(_ctx.isTruncated ? _ctx.truncatedHtmlOrText : _ctx.text), 3)),
     renderSlot(_ctx.$slots, "default", {}, () => [
       _ctx.showButton ? (openBlock(), createElementBlock("button", {
         key: 0,
-        class: normalizeClass([_ctx.classes.button, _ctx.isTruncated ? _ctx.classes.buttonMore : _ctx.classes.buttonLess]),
+        class: normalizeClass([_ctx.proxyClasses.button, _ctx.isTruncated ? _ctx.proxyClasses.buttonMore : _ctx.proxyClasses.buttonLess]),
         onClick: _cache[0] || (_cache[0] = withModifiers((...args) => _ctx.toggle && _ctx.toggle(...args), ["prevent"]))
       }, toDisplayString(_ctx.buttonTitle), 3)) : createCommentVNode("", true)
     ])
