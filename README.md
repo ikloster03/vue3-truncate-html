@@ -1,5 +1,7 @@
 # vue3-truncate-html
 
+More details [here](https://vue3-truncate-html.ikloster.dev).
+
 ## Install
 
 ```shell
