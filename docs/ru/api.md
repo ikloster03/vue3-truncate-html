@@ -5,13 +5,13 @@ title: API
 
 ## Пропсы
 
-| Пропс              | Тип              | Описание                                | Разрешенные значения      | Дефаолтные значения     |
-| :---------------- | :---------------- | :----------------------------------------- | :------------------- | :---------- |
-| `modelValue`      | boolean           | Весь текс / усеченный текст                | `true` or `false`    | `false`     |
-| `text`            | string            | Текст или HTML, которые будут усечены      | -                    | `''`        |
-| `length`          | number            | Длина текста или HTML после усечения       | -                    | `100`       |
-| `hideButton`      | boolean           | Скрыть кнопку больше/меньше                | `true` or `false`    | `false`     |
-| `type`            | string (Type)     | Текст or HTML                              | `text` or `html`     | `text`      |
+| Пропс              | Тип              | Описание                                   | Разрешенные значения | Дефаолтные значения |
+| :---------------- | :---------------- | :----------------------------------------- | :------------------- | :------------------ |
+| `modelValue`      | boolean           | Весь текст / усеченный текст               | `true` or `false`    | `false`             |
+| `text`            | string            | Текст или HTML, которые будут усечены      | -                    | `''`                |
+| `length`          | number            | Длина текста или HTML после усечения       | -                    | `100`               |
+| `hideButton`      | boolean           | Скрыть кнопку больше/меньше                | `true` or `false`    | `false`             |
+| `type`            | string (Type)     | Текст or HTML                              | `text` or `html`     | `text`              |
 | `buttons`         | object (Buttons)  | Читать больше / Показать меньше            | type `Buttons`       | <pre> { <br>    more: 'Read More', <br>    less: 'Show Less' <br> } </pre> |
 | `classes`         | object (Classes)  | Объект CSS классов для компонента          | type `Classes`       | <pre> { <br>    container: 'vue-truncate-html', <br>    content: 'vue-truncate-html__content', <br>    contentHtml: 'vue-truncate-html__content_html', <br>    contentText: 'vue-truncate-html__content_text', <br>    button: 'vue-truncate-html__button', <br>    buttonMore: 'vue-truncate-html__button_more', <br>    buttonLess: 'vue-truncate-html__button_less', <br> } </pre> |
 | `sanitizeOptions` | object (IOptions) | Опции для очистки HTML                     | interface `IOptions` | [Show IOptions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/sanitize-html/index.d.ts#L54)     |
