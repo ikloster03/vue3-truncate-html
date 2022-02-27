@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { axe, toHaveNoViolations } from 'jest-axe';
+import sanitizeHtml from 'sanitize-html';
 import VueTruncateHtml from './VueTruncateHtml.vue';
 import { defaultClasses, defaultButtons } from './const';
 
@@ -25,6 +26,19 @@ const HTML = `
           <li>quibusdam tempora totam vel voluptate voluptatem voluptatum. Ad adipisci architecto,</li>
         </ul>
         <i>beatae blanditiis corporis cumque dolor</i>, eaque excepturi exercitationem magnam nihil optio perferendis perspiciatis qui quis,
+      </p>
+     `;
+
+const HTML2 = `
+      <p>
+        <b>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</b>
+        <script>alert('hello world')</script>
+      </p>
+     `;
+
+const HTML3 = `
+      <p>
+        <b>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</b>
       </p>
      `;
 
@@ -376,7 +390,36 @@ test('custom classes: full custom', async () => {
 
   expect(wrapper2.find(`.${classes.contentHtml}`).exists()).toBe(true);
 });
-//
-// test('custom sanitize options', async () => {
-//   expect(false).toBe(true);
-// });
+
+test('check sanitize', async () => {
+  // sanitizeOptions
+  const wrapper = mount({
+    ...htmlComponentCase,
+    data() {
+      return { isTruncated: false, text: HTML2 };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="html"></vue-truncate-html>',
+  });
+
+  const received = `<div class="vue-truncate-html__content vue-truncate-html__content_html">${sanitizeHtml(HTML2)}</div>`;
+
+  expect(wrapper.find('.vue-truncate-html__content').html()).toBe(received);
+});
+
+test('custom sanitize options', async () => {
+  // sanitizeOptions
+  const sanitizeOptions = {
+    allowedTags: ['p'],
+  };
+  const wrapper = mount({
+    ...htmlComponentCase,
+    data() {
+      return { isTruncated: false, text: HTML3, sanitizeOptions };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="html" :sanitize-options="sanitizeOptions"></vue-truncate-html>',
+  });
+
+  const received = `<div class="vue-truncate-html__content vue-truncate-html__content_html">${sanitizeHtml(HTML3, sanitizeOptions)}</div>`;
+
+  expect(wrapper.find('.vue-truncate-html__content').html()).toBe(received);
+});
