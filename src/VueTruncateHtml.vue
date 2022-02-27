@@ -3,16 +3,16 @@
     <div
       v-if="isHTML"
       :class="[proxyClasses.content, proxyClasses.contentHtml]"
-      v-html="isTruncated ? truncatedHtmlOrText : text" />
+      v-html="proxyText" />
     <div
       v-else
       :class="[proxyClasses.content, proxyClasses.contentText]">
-      {{ isTruncated ? truncatedHtmlOrText : text }}
+      {{ proxyText }}
     </div>
     <slot>
       <button
         v-if="showButton"
-        :class="[proxyClasses.button, isTruncated ? proxyClasses.buttonMore : proxyClasses.buttonLess]"
+        :class="[proxyClasses.button, proxyButtonClass]"
         @click.prevent="toggle">
         {{ buttonTitle }}
       </button>
@@ -80,16 +80,16 @@ export default defineComponent({
 
     const showButton = computed(() => !props.hideButton && textLength.value > props.length);
 
-    const sanitizedHtmlOrText = computed(() => (
-      isHTML.value
-        ? sanitizeHtml(props.text, props.sanitizeOptions)
-        : props.text
-    ));
+    const sanitizedHtmlOrText = computed(() => (isHTML.value
+      ? sanitizeHtml(props.text, props.sanitizeOptions)
+      : props.text));
     const truncatedHtmlOrText = computed(() => (
       isHTML.value
         ? htmlTruncate(sanitizedHtmlOrText.value, props.length)
         : sanitizedHtmlOrText.value.substring(0, props.length)
     ));
+
+    const proxyText = computed(() => (isTruncated.value ? truncatedHtmlOrText.value : sanitizedHtmlOrText.value));
 
     const buttonTitle = computed(() => (
       isTruncated.value
@@ -107,16 +107,17 @@ export default defineComponent({
       buttonLess: props.classes?.buttonLess ?? defaultClasses.buttonLess,
     }));
 
+    const proxyButtonClass = computed(() => (isTruncated.value ? proxyClasses.value.buttonMore : proxyClasses.value.buttonLess));
+
     const toggle = () => {
       isTruncated.value = !isTruncated.value;
     };
 
     return {
-      isTruncated,
       isHTML,
-      textLength,
       showButton,
-      truncatedHtmlOrText,
+      proxyButtonClass,
+      proxyText,
       buttonTitle,
       proxyClasses,
       toggle,
