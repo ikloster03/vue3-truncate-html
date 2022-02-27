@@ -35,11 +35,10 @@ declare const _default: import("vue").DefineComponent<{
         default: undefined;
     };
 }, {
-    isTruncated: import("vue").WritableComputedRef<boolean>;
     isHTML: import("vue").ComputedRef<boolean>;
-    textLength: import("vue").ComputedRef<number>;
     showButton: import("vue").ComputedRef<boolean>;
-    truncatedHtmlOrText: import("vue").ComputedRef<string>;
+    proxyButtonClass: import("vue").ComputedRef<string>;
+    proxyText: import("vue").ComputedRef<string>;
     buttonTitle: import("vue").ComputedRef<string>;
     proxyClasses: import("vue").ComputedRef<{
         container: string;

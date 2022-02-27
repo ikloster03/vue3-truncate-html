@@ -12168,6 +12168,7 @@ const _sfc_main = defineComponent({
     const showButton = computed(() => !props.hideButton && textLength.value > props.length);
     const sanitizedHtmlOrText = computed(() => isHTML.value ? sanitizeHtml$1(props.text, props.sanitizeOptions) : props.text);
     const truncatedHtmlOrText = computed(() => isHTML.value ? truncate_1(sanitizedHtmlOrText.value, props.length) : sanitizedHtmlOrText.value.substring(0, props.length));
+    const proxyText = computed(() => isTruncated.value ? truncatedHtmlOrText.value : sanitizedHtmlOrText.value);
     const buttonTitle = computed(() => {
       var _a, _b;
       return isTruncated.value ? (_a = props.buttons.more) != null ? _a : defaultButtons.more : (_b = props.buttons.less) != null ? _b : defaultButtons.less;
@@ -12184,15 +12185,15 @@ const _sfc_main = defineComponent({
         buttonLess: (_n = (_m = props.classes) == null ? void 0 : _m.buttonLess) != null ? _n : defaultClasses.buttonLess
       };
     });
+    const proxyButtonClass = computed(() => isTruncated.value ? proxyClasses.value.buttonMore : proxyClasses.value.buttonLess);
     const toggle = () => {
       isTruncated.value = !isTruncated.value;
     };
     return {
-      isTruncated,
       isHTML,
-      textLength,
       showButton,
-      truncatedHtmlOrText,
+      proxyButtonClass,
+      proxyText,
       buttonTitle,
       proxyClasses,
       toggle
@@ -12207,15 +12208,15 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     _ctx.isHTML ? (openBlock(), createElementBlock("div", {
       key: 0,
       class: normalizeClass([_ctx.proxyClasses.content, _ctx.proxyClasses.contentHtml]),
-      innerHTML: _ctx.isTruncated ? _ctx.truncatedHtmlOrText : _ctx.text
+      innerHTML: _ctx.proxyText
     }, null, 10, _hoisted_1)) : (openBlock(), createElementBlock("div", {
       key: 1,
       class: normalizeClass([_ctx.proxyClasses.content, _ctx.proxyClasses.contentText])
-    }, toDisplayString(_ctx.isTruncated ? _ctx.truncatedHtmlOrText : _ctx.text), 3)),
+    }, toDisplayString(_ctx.proxyText), 3)),
     renderSlot(_ctx.$slots, "default", {}, () => [
       _ctx.showButton ? (openBlock(), createElementBlock("button", {
         key: 0,
-        class: normalizeClass([_ctx.proxyClasses.button, _ctx.isTruncated ? _ctx.proxyClasses.buttonMore : _ctx.proxyClasses.buttonLess]),
+        class: normalizeClass([_ctx.proxyClasses.button, _ctx.proxyButtonClass]),
         onClick: _cache[0] || (_cache[0] = withModifiers((...args) => _ctx.toggle && _ctx.toggle(...args), ["prevent"]))
       }, toDisplayString(_ctx.buttonTitle), 3)) : createCommentVNode("", true)
     ])
