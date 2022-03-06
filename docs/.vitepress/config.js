@@ -1,17 +1,17 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  lang: 'en-US',
+  lang: 'en',
   title: 'vue3-truncate-html',
   description: 'A Vue 3 component for html truncating',
   locales: {
     '/en/': {
-      lang: 'en-US', // this will be set as the lang attribute on <html>
+      lang: 'en',
       title: 'vue3-truncate-html',
       description: ''
     },
     '/ru/': {
-      lang: 'ru-RU', // this will be set as the lang attribute on <html>
+      lang: 'ru',
       title: 'vue3-truncate-html',
       description: ''
     },
@@ -35,7 +35,7 @@ export default defineConfig({
       },
     ],
     sidebar: {
-      '/en/': [
+      'en': [
         {
           text: 'Introduction',
           link: '/en/index',
@@ -53,7 +53,7 @@ export default defineConfig({
         //   link: '/examples',
         // },
       ],
-      '/ru/': [
+      'ru': [
         {
           text: 'Вступление',
           link: '/ru/index',
