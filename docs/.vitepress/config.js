@@ -3,6 +3,12 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
+console.log({
+  appId: process.env.ALGOLIA_APP_ID,
+  apiKey: process.env.ALGOLIA_API_KEY,
+  indexName: process.env.ALGOLIA_INDEX_NAME
+})
+
 export default defineConfig({
   lang: 'en',
   title: 'vue3-truncate-html',
@@ -43,7 +49,7 @@ export default defineConfig({
       },
       {
         text: 'NPM',
-        link: 'https://github.com/ikloster03/vue3-truncate-html',
+        link: 'https://www.npmjs.com/package/vue3-truncate-html',
       },
     ],
     sidebar: {
