@@ -41,6 +41,10 @@ export default defineConfig({
         text: 'Github',
         link: 'https://github.com/ikloster03/vue3-truncate-html',
       },
+      {
+        text: 'NPM',
+        link: 'https://github.com/ikloster03/vue3-truncate-html',
+      },
     ],
     sidebar: {
       'en': [
