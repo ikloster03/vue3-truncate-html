@@ -21,6 +21,7 @@
   "files": [
     "dist"
   ],
+  "typings": "./dist/src/index.d.ts",
   "main": "./dist/vue3-truncate-html.umd.js",
   "module": "./dist/vue3-truncate-html.es.js",
   "exports": {
