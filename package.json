@@ -2,7 +2,6 @@
   "name": "vue3-truncate-html",
   "version": "0.9.1",
   "description": "A simple Vue 3 component that's truncate your text.",
-  "repository": "https://github.com/ikloster03/vue3-truncate-html",
   "keywords": [
     "vue",
     "vue3",
@@ -16,37 +15,35 @@
     "sanitize"
   ],
   "homepage": "https://vue3-truncate-html.ikloster.dev",
-  "author": "Ivan Monastyrev <ikloster@yandex.ru>",
+  "repository": "https://github.com/ikloster03/vue3-truncate-html",
   "license": "MIT",
-  "files": [
-    "dist"
-  ],
-  "typings": "./dist/src/index.d.ts",
-  "main": "./dist/vue3-truncate-html.umd.js",
-  "module": "./dist/vue3-truncate-html.es.js",
+  "author": "Ivan Monastyrev <ikloster@yandex.ru>",
   "exports": {
     ".": {
       "import": "./dist/vue3-truncate-html.es.js",
       "require": "./dist/vue3-truncate-html.umd.js"
     }
   },
-  "unpkg": "./dist/vue3-truncate-html.umd.js",
+  "main": "./dist/vue3-truncate-html.umd.js",
   "jsdelivr": "./dist/vue3-truncate-html.umd.js",
+  "unpkg": "./dist/vue3-truncate-html.umd.js",
+  "module": "./dist/vue3-truncate-html.es.js",
+  "typings": "./dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "serve": "vitepress serve docs",
-    "build:library": "vite build",
     "analyze": "vite build --config analyze.config.js",
-    "publish:library": "npm publish",
+    "build": "vitepress build docs",
+    "build:library": "vite build",
+    "dev": "vitepress dev docs",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore --fix src",
+    "publish:library": "npm publish",
+    "serve": "vitepress serve docs",
+    "sort": "npx sort-package-json",
     "test": "jest src",
     "test:watch": "jest src -i --watchAll",
-    "sort": "npx sort-package-json",
     "typecheck": "vue-tsc --noEmit"
-  },
-  "peerDependencies": {
-    "vue": "^3.2.31"
   },
   "dependencies": {
     "dotenv": "^16.0.0",
@@ -84,5 +81,8 @@
     "vite-plugin-dts": "^0.9.9",
     "vitepress": "^0.22.3",
     "vue-tsc": "^0.31.4"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.31"
   }
 }
