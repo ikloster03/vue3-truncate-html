@@ -7996,11 +7996,10 @@ var create = function() {
 picocolors_browser.exports = create();
 picocolors_browser.exports.createColors = create;
 var __viteBrowserExternal = {};
-var __viteBrowserExternal$1 = /* @__PURE__ */ Object.freeze({
+var __viteBrowserExternal$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  [Symbol.toStringTag]: "Module",
   "default": __viteBrowserExternal
-});
+}, Symbol.toStringTag, { value: "Module" }));
 var require$$2 = /* @__PURE__ */ getAugmentedNamespace(__viteBrowserExternal$1);
 let pico = picocolors_browser.exports;
 let terminalHighlight$1 = require$$2;
@@ -8761,12 +8760,11 @@ let nanoid$1 = (size = 21) => {
   }
   return id;
 };
-var nonSecure = /* @__PURE__ */ Object.freeze({
+var nonSecure = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  [Symbol.toStringTag]: "Module",
   nanoid: nanoid$1,
   customAlphabet
-});
+}, Symbol.toStringTag, { value: "Module" }));
 var require$$3 = /* @__PURE__ */ getAugmentedNamespace(nonSecure);
 let { SourceMapConsumer: SourceMapConsumer$2, SourceMapGenerator: SourceMapGenerator$2 } = require$$2;
 let { existsSync, readFileSync } = require$$2;
@@ -10188,6 +10186,10 @@ let Comment$2 = comment;
 let AtRule$2 = atRule;
 let Root$4 = root;
 let Rule$2 = rule;
+const SAFE_COMMENT_NEIGHBOR = {
+  empty: true,
+  space: true
+};
 class Parser$1 {
   constructor(input2) {
     this.input = input2;
@@ -10553,10 +10555,14 @@ class Parser$1 {
       if (type === "space" && i === length - 1 && !customProperty) {
         clean = false;
       } else if (type === "comment") {
-        prev = tokens[i - 1];
-        next = tokens[i + 1];
-        if (prev && next && prev[0] !== "space" && next[0] !== "space") {
-          value += token[1];
+        prev = tokens[i - 1] ? tokens[i - 1][0] : "empty";
+        next = tokens[i + 1] ? tokens[i + 1][0] : "empty";
+        if (!SAFE_COMMENT_NEIGHBOR[prev] && !SAFE_COMMENT_NEIGHBOR[next]) {
+          if (value.slice(-1) === ",") {
+            clean = false;
+          } else {
+            value += token[1];
+          }
         } else {
           clean = false;
         }
@@ -11256,7 +11262,7 @@ let Document$1 = document;
 let Root$2 = root;
 class Processor$1 {
   constructor(plugins = []) {
-    this.version = "8.4.6";
+    this.version = "8.4.7";
     this.plugins = this.normalize(plugins);
   }
   use(plugin2) {
@@ -11373,6 +11379,9 @@ function postcss(...plugins) {
 postcss.plugin = function plugin(name, initializer) {
   if (console && console.warn) {
     console.warn(name + ": postcss.plugin was deprecated. Migration guide:\nhttps://evilmartians.com/chronicles/postcss-8-plugin-migration");
+    if ({}.LANG && {}.LANG.startsWith("cn")) {
+      console.warn(name + ": \u91CC\u9762 postcss.plugin \u88AB\u5F03\u7528. \u8FC1\u79FB\u6307\u5357:\nhttps://www.w3ctech.com/topic/2226");
+    }
   }
   function creator(...args) {
     let transformer = initializer(...args);
@@ -12223,4 +12232,4 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   ], 2);
 }
 var VueTruncateHtml = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
-export { VueTruncateHtml };
+export { HTML, TEXT, VueTruncateHtml, defaultButtons, defaultClasses };
