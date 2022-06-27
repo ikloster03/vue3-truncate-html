@@ -21,9 +21,9 @@ module.exports = {
   roots: [
     '<rootDir>/src',
   ],
-  collectCoverage: true,
-  collectCoverageFrom: [
-    'src/**/*.{ts,js,vue}',
-    '!src/index.ts',
-  ],
+  // collectCoverage: true,
+  // collectCoverageFrom: [
+  //   'src/**/*.{ts,js,vue}',
+  //   '!src/index.ts',
+  // ],
 };
