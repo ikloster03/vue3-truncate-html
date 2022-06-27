@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  class="vue-truncate-html"
+>
+  <div
+    class="vue-truncate-html__content vue-truncate-html__content_text"
+  >
+    
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      Adipisci animi autem beatae c
+  </div>
+  
+  <button
+    class="vue-truncate-html__button vue-truncate-html__button_more"
+  >
+    Read More
+  </button>
+  
+</div>
+`;
