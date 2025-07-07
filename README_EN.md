@@ -1,47 +1,47 @@
 # vue3-truncate-html
 
-> **Language:** 🇷🇺 Русский | [🇺🇸 English](./README_EN.md)
+> **Language:** [🇷🇺 Русский](./README.md) | 🇺🇸 English
 
 [![npm version](https://badge.fury.io/js/vue3-truncate-html.svg)](https://badge.fury.io/js/vue3-truncate-html)
 [![npm downloads](https://img.shields.io/npm/dw/vue3-truncate-html)](https://badge.fury.io/js/vue3-truncate-html)
 [![NPM license](https://img.shields.io/npm/l/vue3-truncate-html)](https://github.com/ikloster03/vue3-truncate-html/blob/main/LICENSE)
 [![npm type definitions](https://img.shields.io/npm/types/vue3-truncate-html)](https://github.com/ikloster03/vue3-truncate-html)
 
-Простой Vue 3 компонент для обрезки HTML-текста с возможностью развернуть/свернуть содержимое.
+Simple Vue 3 component for truncating HTML text with expand/collapse functionality.
 
-Подробная документация [здесь](https://vue3-truncate-html.ikloster.dev).
+More details [here](https://vue3-truncate-html.ikloster.dev).
 
-## Установка
+## Install
 
 ```shell
 npm i vue3-truncate-html
 ```
 
-или
+or
 
 ```shell
 yarn add vue3-truncate-html
 ```
 
-или
+or
 
 ```shell
 pnpm add vue3-truncate-html
 ```
 
-## Пример использования
+## Example
 
 ```vue
 <template>
   <div class="vue-truncate-html-example">
     <div class="vue-truncate-html-example__container">
-      <h3>Обрезка обычного текста</h3>
+      <h3>Plain text truncation</h3>
       <vue-truncate-html
         v-model="isTruncated"
         :text="text" />
     </div>
     <div class="vue-truncate-html-example__container">
-      <h3>Обрезка HTML-разметки</h3>
+      <h3>HTML markup truncation</h3>
       <vue-truncate-html
         v-model="isTruncated2"
         type="html"
@@ -99,51 +99,51 @@ export default {
 }
 </style>
 
-## Основные возможности
+## Features
 
-- ✅ **Обрезка текста и HTML** - поддержка обычного текста и HTML-разметки
-- ✅ **Реактивность** - использует v-model для управления состоянием
-- ✅ **Безопасность** - санитизация HTML для предотвращения XSS
-- ✅ **TypeScript** - полная поддержка TypeScript
-- ✅ **Легковесность** - минимальные зависимости
-- ✅ **Настраиваемость** - множество опций для кастомизации
+- ✅ **Text & HTML truncation** - supports both plain text and HTML markup
+- ✅ **Reactivity** - uses v-model for state management
+- ✅ **Security** - HTML sanitization to prevent XSS
+- ✅ **TypeScript** - full TypeScript support
+- ✅ **Lightweight** - minimal dependencies
+- ✅ **Customizable** - multiple options for customization
 
 ## API
 
 ### Props
 
-| Prop | Тип | По умолчанию | Описание |
-|------|-----|-------------|----------|
-| `text` | `string` | `''` | Текст для обрезки |
-| `type` | `'text' \| 'html'` | `'text'` | Тип контента |
-| `length` | `number` | `100` | Максимальная длина |
-| `clamp` | `string` | `'...'` | Символы для обрезки |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | `string` | `''` | Text to truncate |
+| `type` | `'text' \| 'html'` | `'text'` | Content type |
+| `length` | `number` | `100` | Maximum length |
+| `clamp` | `string` | `'...'` | Truncation characters |
 
 ### Events
 
-| Event | Тип | Описание |
-|-------|-----|----------|
-| `update:modelValue` | `(value: boolean) => void` | Изменение состояния развернуто/свернуто |
+| Event | Type | Description |
+|-------|------|-------------|
+| `update:modelValue` | `(value: boolean) => void` | Expanded/collapsed state change |
 
-## Разработка
+## Development
 
 ```bash
-# Установка зависимостей
+# Install dependencies
 pnpm install
 
-# Запуск тестов
+# Run tests
 pnpm test
 
-# Линтинг
+# Lint
 pnpm lint
 
-# Проверка типов
+# Type check
 pnpm typecheck
 
-# Сборка библиотеки
+# Build library
 pnpm build:library
 ```
 
-## Лицензия
+## License
 
-MIT © [Ivan Monastyrev](https://github.com/ikloster03)
+MIT © [Ivan Monastyrev](https://github.com/ikloster03) 
