@@ -12,3 +12,6 @@ package-lock.json
 
 dist
 docs/.vitepress/dist
+
+test-vue-project
+vue3-truncate-html-1.0.0.tgz
