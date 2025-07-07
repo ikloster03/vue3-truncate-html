@@ -35,6 +35,10 @@ export default defineConfig({
             text: 'API',
             link: '/api',
           },
+          {
+            text: 'Тестирование',
+            link: '/testing',
+          },
         ]
       }
     },
@@ -60,12 +64,16 @@ export default defineConfig({
             link: '/en/',
           },
           {
-            text: 'Getting started',
+            text: 'Getting Started',
             link: '/en/getting-started',
           },
           {
             text: 'API',
             link: '/en/api',
+          },
+          {
+            text: 'Testing',
+            link: '/en/testing',
           },
         ]
       }

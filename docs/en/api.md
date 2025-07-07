@@ -5,98 +5,220 @@ title: API
 
 ## Props
 
-| Prop              | Type              | Description                                | Accepted Values      | Default     |
-| :---------------- | :---------------- | :----------------------------------------- | :------------------- | :---------- |
-| `modelValue`      | boolean           | Truncated model value                            | `true` or `false`    | `false`     |
-| `text`            | string            | The text or HTML that will be truncated    | -                    | `''`        |
-| `length`          | number            | Length of the text or HTML after truncate. | -                    | `100`       |
-| `hideButton`      | boolean           | It can force hide button more/less         | `true` or `false`    | `false`     |
-| `type`            | string (Type)     | Text or html                               | `text` or `html`     | `text`      |
-| `buttons`         | object (Buttons)  | Read More / Show Less                      | type `Buttons`       | <pre> { <br>    more: 'Read More', <br>    less: 'Show Less' <br> } </pre> |
-| `classes`         | object (Classes)  | All css classes                            | type `Classes`       | <pre> { <br>    container: 'vue-truncate-html', <br>    content: 'vue-truncate-html__content', <br>    contentHtml: 'vue-truncate-html__content_html', <br>    contentText: 'vue-truncate-html__content_text', <br>    button: 'vue-truncate-html__button', <br>    buttonMore: 'vue-truncate-html__button_more', <br>    buttonLess: 'vue-truncate-html__button_less', <br> } </pre> |
-| `sanitizeOptions` | object (IOptions) | Options for HTML sanitizing                | interface `IOptions` | [Show IOptions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/sanitize-html/index.d.ts#L54)     |
+| Prop              | Type              | Description                                | Accepted Values      | Default             |
+| :---------------- | :---------------- | :----------------------------------------- | :------------------- | :------------------ |
+| `modelValue`      | `boolean`         | Controls truncation state (required)       | `true` or `false`    | **required**        |
+| `text`            | `string`          | Text or HTML to be truncated               | any string           | `''`                |
+| `length`          | `number`          | Length of text after truncation            | any number           | `100`               |
+| `hideButton`      | `boolean`         | Hide more/less button                      | `true` or `false`    | `false`             |
+| `type`            | `string`          | Content type                               | `'text'` or `'html'` | `'text'`            |
+| `buttons`         | `Buttons`         | Button text configuration                  | `Buttons` object     | `{ more: 'Read More', less: 'Show Less' }` |
+| `classes`         | `Classes`         | CSS classes for customization              | `Classes` object     | see below           |
+| `sanitizeOptions` | `IOptions`        | Options for HTML sanitization              | `IOptions` object    | `undefined`         |
+
+### `Buttons` Type
+
+```typescript
+type Buttons = {
+  more: string  // "Show more" button text
+  less: string  // "Show less" button text
+}
+```
+
+### `Classes` Type
+
+```typescript
+type Classes = {
+  container: string      // Container class
+  content: string        // Content class
+  contentHtml: string    // HTML content class
+  contentText: string    // Text content class
+  button: string         // Button class
+  buttonMore: string     // "More" button class
+  buttonLess: string     // "Less" button class
+}
+```
+
+### Default Classes
+
+```typescript
+const defaultClasses: Classes = {
+  container: 'vue-truncate-html',
+  content: 'vue-truncate-html__content',
+  contentHtml: 'vue-truncate-html__content_html',
+  contentText: 'vue-truncate-html__content_text',
+  button: 'vue-truncate-html__button',
+  buttonMore: 'vue-truncate-html__button_more',
+  buttonLess: 'vue-truncate-html__button_less',
+}
+```
 
 ## Events
 
-| Event               | Description               | Parameters    |
-| :------------------ | :------------------------ | :------------ |
-| `update:modelValue` | Triggered on button click | `modelValue`  |
+| Event               | Description                    | Parameters               |
+| :------------------ | :----------------------------- | :----------------------- |
+| `update:modelValue` | Triggered on state change      | `boolean` - new value    |
 
 ## Slots
 
-| Slot      | Description                    |
-| :-------- | :----------------------------- |
-| `default` | Default slot for custom button |          
+| Slot      | Description                    | Scope |
+| :-------- | :----------------------------- | :---- |
+| `default` | Default slot for custom button | -     |
 
-## Examples
+## Usage Examples
+
+### Basic Text Example
 
 ```vue
 <template>
-  <div class="vue-truncate-html-example">
-    <div class="vue-truncate-html-example__container">
-      <vue-truncate-html
-        v-model="isTruncated"
-        :text="text" />
-    </div>
-    <div class="vue-truncate-html-example__container">
-      <vue-truncate-html
-        v-model="isTruncated2"
-        type="html"
-        :text="html" />
-    </div>
-  </div>
+  <vue-truncate-html
+    v-model="isTruncated"
+    :text="text"
+    :length="150" />
 </template>
 
-<script>
-import { ref } from 'vue';
-import { VueTruncateHtml } from 'vue3-truncate-html';
+<script setup>
+import { ref } from 'vue'
+import { VueTruncateHtml } from 'vue3-truncate-html'
 
-export default {
-  name: 'VueTruncateHtmlExample',
-  components: {
-    VueTruncateHtml,
-  },
-  setup() {
-    const isTruncated = ref(true);
-    const isTruncated2 = ref(true);
-
-    const text = `
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      Adipisci animi autem beatae consequuntur debitis delectus deleniti ducimus enim,
-      facere hic id impedit labore laboriosam magni molestiae nemo non numquam officiis porro,
-      quibusdam tempora totam vel voluptate voluptatem voluptatum. Ad adipisci architecto,
-      beatae blanditiis corporis cumque dolor, eaque excepturi exercitationem magnam nihil optio perferendis perspiciatis qui quis,
-      `;
-
-    const html = `
-      <b>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</b>
-      <ul>
-        <li>
-            <a href="https://google.com">Google.com</a>
-            Adipisci animi autem beatae consequuntur debitis delectus deleniti ducimus enim,
-        </li>
-        <li>facere hic id impedit labore laboriosam magni molestiae nemo non numquam officiis porro,</li>
-        <li>quibusdam tempora totam vel voluptate voluptatem voluptatum. Ad adipisci architecto,</li>
-      </ul>
-      <i>beatae blanditiis corporis cumque dolor</i>, eaque excepturi exercitationem magnam nihil optio perferendis perspiciatis qui quis,
-    `;
-
-    return {
-      isTruncated, isTruncated2, text, html,
-    };
-  },
-};
+const isTruncated = ref(true)
+const text = `
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+  Adipisci animi autem beatae consequuntur debitis delectus deleniti ducimus enim,
+  facere hic id impedit labore laboriosam magni molestiae nemo non numquam officiis porro,
+  quibusdam tempora totam vel voluptate voluptatem voluptatum.
+`
 </script>
+```
 
-<style scoped>
-.vue-truncate-html-example__container {
-  padding: 15px;
-  background-color: #f3f5f7;
+### HTML Example
+
+```vue
+<template>
+  <vue-truncate-html
+    v-model="isTruncated"
+    :text="html"
+    type="html"
+    :length="200" />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { VueTruncateHtml } from 'vue3-truncate-html'
+
+const isTruncated = ref(true)
+const html = `
+  <b>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</b>
+  <ul>
+    <li><a href="https://example.com">Link</a> - description</li>
+    <li>Second list item</li>
+  </ul>
+  <i>Italic text</i>
+`
+</script>
+```
+
+### Custom Buttons
+
+```vue
+<template>
+  <vue-truncate-html
+    v-model="isTruncated"
+    :text="text"
+    :buttons="customButtons" />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { VueTruncateHtml } from 'vue3-truncate-html'
+
+const isTruncated = ref(true)
+const text = "Long text..."
+const customButtons = {
+  more: 'Show full text',
+  less: 'Collapse'
 }
-.vue-truncate-html-example__container:first-child {
-  margin-bottom: 30px;
+</script>
+```
+
+### Custom CSS Classes
+
+```vue
+<template>
+  <vue-truncate-html
+    v-model="isTruncated"
+    :text="text"
+    :classes="customClasses" />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { VueTruncateHtml } from 'vue3-truncate-html'
+
+const isTruncated = ref(true)
+const text = "Long text..."
+const customClasses = {
+  container: 'my-truncate',
+  content: 'my-truncate__content',
+  button: 'my-truncate__button',
+  // ... other classes
 }
-</style>
+</script>
+```
+
+### Custom Button with Slot
+
+```vue
+<template>
+  <vue-truncate-html v-model="isTruncated" :text="text">
+    <button 
+      @click="isTruncated = !isTruncated"
+      class="custom-button">
+      {{ isTruncated ? '📖 Read more' : '📕 Collapse' }}
+    </button>
+  </vue-truncate-html>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { VueTruncateHtml } from 'vue3-truncate-html'
+
+const isTruncated = ref(true)
+const text = "Long text..."
+</script>
+```
+
+### HTML Sanitization
+
+```vue
+<template>
+  <vue-truncate-html
+    v-model="isTruncated"
+    :text="unsafeHtml"
+    type="html"
+    :sanitize-options="sanitizeOptions" />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { VueTruncateHtml } from 'vue3-truncate-html'
+
+const isTruncated = ref(true)
+const unsafeHtml = `
+  <p>Safe content</p>
+  <script>alert('Unsafe script')</script>
+`
+
+const sanitizeOptions = {
+  allowedTags: ['p', 'b', 'i', 'strong', 'em', 'ul', 'ol', 'li', 'a'],
+  allowedAttributes: {
+    'a': ['href']
+  }
+}
+</script>
+```
+
+## Interactive Example
 
 <VueTruncateHtmlExample />
 
