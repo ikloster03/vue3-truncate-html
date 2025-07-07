@@ -37,8 +37,8 @@
     "build": "vitepress build docs",
     "build:library": "vite build",
     "dev": "vitepress dev docs",
-    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore --fix src",
     "postinstall": "simple-git-hooks",
+    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore --fix src",
     "publish:library": "pnpm publish",
     "serve": "vitepress serve docs",
     "sort": "npx sort-package-json",
@@ -47,8 +47,8 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "simple-git-hooks": {
-    "commit-msg": "npx commitlint --edit $1",
     "pre-commit": "pnpm lint",
+    "commit-msg": "npx commitlint --edit $1",
     "pre-push": "pnpm typecheck && pnpm test"
   },
   "dependencies": {
