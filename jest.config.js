@@ -21,6 +21,10 @@ module.exports = {
   roots: [
     '<rootDir>/src',
   ],
+  preset: 'ts-jest',
+  testEnvironmentOptions: {
+    customExportConditions: ['node', 'node-addons'],
+  },
   // collectCoverage: true,
   // collectCoverageFrom: [
   //   'src/**/*.{ts,js,vue}',

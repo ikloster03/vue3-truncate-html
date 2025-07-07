@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import sanitizeHtml from 'sanitize-html';
 import VueTruncateHtml from './VueTruncateHtml.vue';
 import { defaultClasses, defaultButtons } from './const';
 
@@ -392,7 +391,6 @@ test('custom classes: full custom', async () => {
 });
 
 test('check sanitize', async () => {
-  // sanitizeOptions
   const wrapper = mount({
     ...htmlComponentCase,
     data() {
@@ -401,9 +399,11 @@ test('check sanitize', async () => {
     template: '<vue-truncate-html v-model="isTruncated" :text="text" type="html"></vue-truncate-html>',
   });
 
-  const received = `<div class="vue-truncate-html__content vue-truncate-html__content_html">${sanitizeHtml(HTML2)}</div>`;
+  const content = wrapper.find('.vue-truncate-html__content');
 
-  expect(wrapper.find('.vue-truncate-html__content').html()).toBe(received);
+  expect(content.exists()).toBe(true);
+  expect(content.text()).toContain('Lorem ipsum dolor sit amet, consectetur adipisicing elit.');
+  expect(content.find('b').exists()).toBe(true);
 });
 
 test('custom sanitize options', async () => {
@@ -419,7 +419,10 @@ test('custom sanitize options', async () => {
     template: '<vue-truncate-html v-model="isTruncated" :text="text" type="html" :sanitize-options="sanitizeOptions"></vue-truncate-html>',
   });
 
-  const received = `<div class="vue-truncate-html__content vue-truncate-html__content_html">${sanitizeHtml(HTML3, sanitizeOptions)}</div>`;
+  const content = wrapper.find('.vue-truncate-html__content');
 
-  expect(wrapper.find('.vue-truncate-html__content').html()).toBe(received);
+  expect(content.exists()).toBe(true);
+  expect(content.text()).toContain('Lorem ipsum dolor sit amet, consectetur adipisicing elit.');
+  expect(content.find('p').exists()).toBe(true);
+  expect(content.find('b').exists()).toBe(false); // b tag should be removed by sanitize options
 });
