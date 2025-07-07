@@ -9,7 +9,7 @@
 
 Simple Vue 3 component for truncating HTML text with expand/collapse functionality.
 
-More details [here](https://vue3-truncate-html.ikloster.dev).
+More details [here](https://vue3-truncate-html.ikloster.tech).
 
 ## 📚 Documentation
 
