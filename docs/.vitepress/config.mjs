@@ -1,80 +1,78 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  lang: 'en',
+  lang: 'ru',
   title: 'vue3-truncate-html',
-  description: 'A Vue 3 component for html truncating',
+  description: 'Vue 3 компонент для обрезки HTML с санитизацией',
+
   locales: {
-    '/en/': {
-      lang: 'en',
-      title: 'vue3-truncate-html',
-      description: ''
-    },
-    '/ru/': {
+    root: {
+      label: 'Русский',
       lang: 'ru',
       title: 'vue3-truncate-html',
-      description: ''
+      description: 'Vue 3 компонент для обрезки HTML с санитизацией',
+      themeConfig: {
+        nav: [
+          {
+            text: 'Github',
+            link: 'https://github.com/ikloster03/vue3-truncate-html',
+          },
+          {
+            text: 'NPM',
+            link: 'https://www.npmjs.com/package/vue3-truncate-html',
+          },
+        ],
+        sidebar: [
+          {
+            text: 'Вступление',
+            link: '/',
+          },
+          {
+            text: 'Быстрый старт',
+            link: '/getting-started',
+          },
+          {
+            text: 'API',
+            link: '/api',
+          },
+        ]
+      }
     },
+    en: {
+      label: 'English',
+      lang: 'en',
+      title: 'vue3-truncate-html',
+      description: 'A Vue 3 component for html truncating with sanitizing',
+      themeConfig: {
+        nav: [
+          {
+            text: 'Github',
+            link: 'https://github.com/ikloster03/vue3-truncate-html',
+          },
+          {
+            text: 'NPM',
+            link: 'https://www.npmjs.com/package/vue3-truncate-html',
+          },
+        ],
+        sidebar: [
+          {
+            text: 'Introduction',
+            link: '/en/',
+          },
+          {
+            text: 'Getting started',
+            link: '/en/getting-started',
+          },
+          {
+            text: 'API',
+            link: '/en/api',
+          },
+        ]
+      }
+    }
   },
+
   themeConfig: {
     docsDir: 'docs',
-    locales: {
-      '/en/': {
-        label: 'English',
-        selectText: 'English',
-      },
-      '/ru/': {
-        label: 'Русский',
-        selectText: 'Русский',
-      },
-    },
-    nav: [
-      {
-        text: 'Github',
-        link: 'https://github.com/ikloster03/vue3-truncate-html',
-      },
-      {
-        text: 'NPM',
-        link: 'https://www.npmjs.com/package/vue3-truncate-html',
-      },
-    ],
-    sidebar: {
-      'en': [
-        {
-          text: 'Introduction',
-          link: '/en/index',
-        },
-        {
-          text: 'Getting started',
-          link: '/en/getting-started',
-        },
-        {
-          text: 'API',
-          link: '/en/api',
-        },
-        // {
-        //   text: 'Examples',
-        //   link: '/examples',
-        // },
-      ],
-      'ru': [
-        {
-          text: 'Вступление',
-          link: '/ru/index',
-        },
-        {
-          text: 'Быстрый старт',
-          link: '/ru/getting-started',
-        },
-        {
-          text: 'API',
-          link: '/ru/api',
-        },
-        // {
-        //   text: 'Examples',
-        //   link: '/examples',
-        // },
-      ]
-    }
   }
 })

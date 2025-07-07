@@ -1,8 +1,8 @@
 ---
-title: Introduction
+title: Вступление
 ---
 
 
 # vue3-truncate-html
 
-vue3-truncate-html is an open source library with the goal of helping you use component for text/html truncating with sanitising.
+vue3-truncate-html это библиотека, которая поможет сократить text/html с очисткой.
