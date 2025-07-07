@@ -20,15 +20,15 @@
   "author": "Ivan Monastyrev <ikloster@yandex.ru>",
   "exports": {
     ".": {
-      "import": "./dist/vue3-truncate-html.es.js",
+      "import": "./dist/vue3-truncate-html.mjs",
       "require": "./dist/vue3-truncate-html.umd.js"
     }
   },
   "main": "./dist/vue3-truncate-html.umd.js",
   "jsdelivr": "./dist/vue3-truncate-html.umd.js",
   "unpkg": "./dist/vue3-truncate-html.umd.js",
-  "module": "./dist/vue3-truncate-html.es.js",
-  "typings": "./dist/src/index.d.ts",
+  "module": "./dist/vue3-truncate-html.mjs",
+  "typings": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -46,6 +46,11 @@
     "sort": "npx sort-package-json",
     "test": "jest src",
     "test:watch": "jest src -i --watchAll",
+    "test:pack": "pnpm pack && tar -tzf *.tgz",
+    "test:install": "bash scripts/test-install.sh",
+    "test:project": "bash scripts/create-test-project.sh",
+    "test:prepublish": "pnpm build:library && pnpm test && pnpm typecheck && pnpm test:pack",
+    "prepack": "pnpm build:library && pnpm test && pnpm typecheck",
     "typecheck": "vue-tsc --noEmit",
     "version:patch": "npm version patch && git push && git push --tags",
     "version:minor": "npm version minor && git push && git push --tags",
