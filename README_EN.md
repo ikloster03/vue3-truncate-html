@@ -11,6 +11,12 @@ Simple Vue 3 component for truncating HTML text with expand/collapse functionali
 
 More details [here](https://vue3-truncate-html.ikloster.dev).
 
+## 📚 Documentation
+
+- 🧪 [Testing Library](./.github/TESTING_EN.md) - complete guide for testing before publishing
+- 🚀 [Release Process](./.github/RELEASE_EN.md) - automated release creation process
+- 🛡️ [Branch Protection](./.github/BRANCH_PROTECTION_EN.md) - setting up required PR checks
+
 ## Install
 
 ```shell
