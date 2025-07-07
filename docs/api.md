@@ -97,10 +97,9 @@ export default {
   margin-bottom: 30px;
 }
 </style>
-```
 
 <VueTruncateHtmlExample />
 
 <script setup>
-import VueTruncateHtmlExample from '../VueTruncateHtmlExample.vue'
+import VueTruncateHtmlExample from './VueTruncateHtmlExample.vue'
 </script>
