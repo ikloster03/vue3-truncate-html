@@ -1,13 +1,4 @@
 import { defineConfig } from 'vitepress'
-import dotenv from 'dotenv'
-
-dotenv.config()
-
-console.log({
-  appId: process.env.ALGOLIA_APP_ID,
-  apiKey: process.env.ALGOLIA_API_KEY,
-  indexName: process.env.ALGOLIA_INDEX_NAME
-})
 
 export default defineConfig({
   lang: 'en',
@@ -27,11 +18,6 @@ export default defineConfig({
   },
   themeConfig: {
     docsDir: 'docs',
-    algolia: {
-      appId: process.env.ALGOLIA_APP_ID,
-      apiKey: process.env.ALGOLIA_API_KEY,
-      indexName: process.env.ALGOLIA_INDEX_NAME
-    },
     locales: {
       '/en/': {
         label: 'English',

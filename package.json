@@ -52,7 +52,6 @@
     "pre-push": "pnpm typecheck && pnpm test"
   },
   "dependencies": {
-    "dotenv": "^17.0.1",
     "html-truncate": "^1.2.2",
     "sanitize-html": "^2.17.0"
   },
