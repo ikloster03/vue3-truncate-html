@@ -38,7 +38,7 @@
     "build:library": "vite build",
     "dev": "vitepress dev docs",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore --fix src",
-    "publish:library": "npm publish",
+    "publish:library": "pnpm publish",
     "serve": "vitepress serve docs",
     "sort": "npx sort-package-json",
     "test": "jest src",
