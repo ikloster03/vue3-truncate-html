@@ -33,6 +33,7 @@
     "dist"
   ],
   "scripts": {
+    "changelog:preview": "npx changelogithub --dry",
     "analyze": "vite build --config analyze.config.js",
     "build": "vitepress build docs",
     "build:library": "vite build",
