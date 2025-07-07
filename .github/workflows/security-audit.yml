@@ -1,0 +1,212 @@
+name: Security Audit
+
+on:
+  schedule:
+    # Запуск каждый месяц 1 числа в 09:00 UTC
+    - cron: '0 9 1 * *'
+  workflow_dispatch: # Позволяет запускать вручную
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run npm audit
+      run: |
+        echo "## NPM Security Audit" >> security-report.md
+        echo "### Vulnerabilities found:" >> security-report.md
+        npm audit --audit-level=moderate --json > npm-audit.json || true
+
+        if [ -s npm-audit.json ]; then
+          echo "Found vulnerabilities in npm packages" >> security-report.md
+          echo "\`\`\`json" >> security-report.md
+          cat npm-audit.json >> security-report.md
+          echo "\`\`\`" >> security-report.md
+        else
+          echo "No vulnerabilities found in npm packages ✅" >> security-report.md
+        fi
+
+    - name: Check for outdated packages
+      run: |
+        echo "" >> security-report.md
+        echo "## Outdated Packages" >> security-report.md
+        echo "### Packages that need updates:" >> security-report.md
+
+        npm outdated --json > outdated.json || true
+
+        if [ -s outdated.json ] && [ "$(cat outdated.json)" != "{}" ]; then
+          echo "Found outdated packages:" >> security-report.md
+          echo "\`\`\`json" >> security-report.md
+          cat outdated.json >> security-report.md
+          echo "\`\`\`" >> security-report.md
+        else
+          echo "All packages are up to date ✅" >> security-report.md
+        fi
+
+    - name: Install and run Snyk
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      run: |
+        echo "" >> security-report.md
+        echo "## Snyk Security Scan" >> security-report.md
+
+        if [ -n "$SNYK_TOKEN" ]; then
+          npm install -g snyk
+          snyk auth $SNYK_TOKEN
+
+          echo "### Code vulnerabilities:" >> security-report.md
+          snyk test --json > snyk-test.json || true
+
+          if [ -s snyk-test.json ]; then
+            echo "Snyk found vulnerabilities:" >> security-report.md
+            echo "\`\`\`json" >> security-report.md
+            cat snyk-test.json >> security-report.md
+            echo "\`\`\`" >> security-report.md
+          else
+            echo "No vulnerabilities found by Snyk ✅" >> security-report.md
+          fi
+
+          echo "" >> security-report.md
+          echo "### Code quality issues:" >> security-report.md
+          snyk code test --json > snyk-code.json || true
+
+          if [ -s snyk-code.json ]; then
+            echo "Snyk Code found issues:" >> security-report.md
+            echo "\`\`\`json" >> security-report.md
+            cat snyk-code.json >> security-report.md
+            echo "\`\`\`" >> security-report.md
+          else
+            echo "No code quality issues found by Snyk ✅" >> security-report.md
+          fi
+        else
+          echo "Snyk token not configured - skipping Snyk scan ⚠️" >> security-report.md
+          echo "To enable Snyk scanning, add SNYK_TOKEN to repository secrets" >> security-report.md
+        fi
+
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/init@v3
+      with:
+        languages: javascript
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+
+    - name: Check for sensitive files
+      run: |
+        echo "" >> security-report.md
+        echo "## Sensitive Files Check" >> security-report.md
+
+        # Проверка на наличие потенциально опасных файлов
+        sensitive_files=$(find . -name "*.env*" -o -name "*.key" -o -name "*.pem" -o -name "*.p12" -o -name "*.pfx" -o -name "*secret*" -o -name "*password*" | grep -v node_modules | grep -v .git || true)
+
+        if [ -n "$sensitive_files" ]; then
+          echo "⚠️ Found potentially sensitive files:" >> security-report.md
+          echo "\`\`\`" >> security-report.md
+          echo "$sensitive_files" >> security-report.md
+          echo "\`\`\`" >> security-report.md
+          echo "Please review these files and ensure they don't contain sensitive information" >> security-report.md
+        else
+          echo "No sensitive files found ✅" >> security-report.md
+        fi
+
+    - name: Check for hardcoded secrets
+      run: |
+        echo "" >> security-report.md
+        echo "## Hardcoded Secrets Check" >> security-report.md
+
+        # Простая проверка на наличие потенциальных секретов в коде
+        secrets_found=$(grep -r -i -E "(password|secret|token|key|api_key|private_key)" --include="*.js" --include="*.ts" --include="*.vue" --include="*.json" . | grep -v node_modules | grep -v .git | grep -v "// " | grep -v "* " | head -10 || true)
+
+        if [ -n "$secrets_found" ]; then
+          echo "⚠️ Found potential hardcoded secrets (first 10 matches):" >> security-report.md
+          echo "\`\`\`" >> security-report.md
+          echo "$secrets_found" >> security-report.md
+          echo "\`\`\`" >> security-report.md
+          echo "Please review these matches and ensure no real secrets are hardcoded" >> security-report.md
+        else
+          echo "No potential hardcoded secrets found ✅" >> security-report.md
+        fi
+
+    - name: Generate security summary
+      run: |
+        echo "" >> security-report.md
+        echo "## Summary" >> security-report.md
+        echo "Security audit completed on $(date)" >> security-report.md
+        echo "" >> security-report.md
+        echo "### Recommendations:" >> security-report.md
+        echo "1. Review and fix any vulnerabilities found above" >> security-report.md
+        echo "2. Update outdated packages regularly" >> security-report.md
+        echo "3. Configure Snyk token for enhanced security scanning" >> security-report.md
+        echo "4. Review CodeQL results in the Security tab" >> security-report.md
+        echo "5. Ensure no sensitive information is committed to the repository" >> security-report.md
+
+    - name: Upload security report
+      uses: actions/upload-artifact@v4
+      with:
+        name: security-audit-report
+        path: security-report.md
+        retention-days: 30
+
+    - name: Create Issue if vulnerabilities found
+      if: failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+
+          let reportContent = '';
+          try {
+            reportContent = fs.readFileSync('security-report.md', 'utf8');
+          } catch (error) {
+            reportContent = 'Security report could not be generated.';
+          }
+
+          const issueBody = `
+          # 🔒 Monthly Security Audit Report
+
+          A scheduled security audit has detected potential issues that require attention.
+
+          ## Report Details
+
+          ${reportContent}
+
+          ## Next Steps
+
+          1. Review the security report above
+          2. Fix any critical or high-severity vulnerabilities
+          3. Update outdated packages
+          4. Review and address any code quality issues
+          5. Close this issue once all issues are resolved
+
+          ---
+
+          This issue was automatically created by the monthly security audit workflow.
+          Report generated on: ${new Date().toISOString()}
+          `;
+
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `🔒 Monthly Security Audit - ${new Date().toISOString().split('T')[0]}`,
+            body: issueBody,
+            labels: ['security', 'audit', 'maintenance']
+          });
+
+    - name: Comment on success
+      if: success()
+      run: |
+        echo "✅ Security audit completed successfully!"
+        echo "📊 Report uploaded as artifact"
+        echo "🔍 Check CodeQL results in the Security tab"
