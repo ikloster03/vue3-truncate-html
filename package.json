@@ -45,7 +45,14 @@
     "sort": "npx sort-package-json",
     "test": "jest src",
     "test:watch": "jest src -i --watchAll",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "version:patch": "npm version patch && git push && git push --tags",
+    "version:minor": "npm version minor && git push && git push --tags",
+    "version:major": "npm version major && git push && git push --tags",
+    "version:prerelease": "npm version prerelease && git push && git push --tags",
+    "version:prepatch": "npm version prepatch && git push && git push --tags",
+    "version:preminor": "npm version preminor && git push && git push --tags",
+    "version:premajor": "npm version premajor && git push && git push --tags"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint",
