@@ -5,157 +5,157 @@
     "failed": 0,
     "unstable": 0,
     "overallStatus": "PASS",
-    "timestamp": "2025-07-08T20:48:41.888Z",
-    "totalDuration": 52.50722824999994,
-    "averageDuration": 5.834136472222216,
-    "score": 97,
+    "timestamp": "2025-07-08T22:51:37.551Z",
+    "totalDuration": 36.91937187500004,
+    "averageDuration": 4.1021524305555594,
+    "score": 98,
     "reliability": "LOW",
     "runsPerTest": 10
   },
   "results": [
     {
       "name": "Large HTML content processing",
-      "averageTime": 5.138800124999989,
-      "minTime": 4.1059529999999995,
-      "maxTime": 5.9057990000001155,
-      "standardDeviation": 0.5962060613876311,
-      "coefficient": 11.602048082919598,
+      "averageTime": 3.397360374999991,
+      "minTime": 2.936849999999936,
+      "maxTime": 4.243812000000048,
+      "standardDeviation": 0.42439280949403635,
+      "coefficient": 12.491839623991536,
       "threshold": 100,
       "status": "PASS",
       "category": "processing",
       "description": "Processing large HTML content should be fast",
       "dataSize": "8.1KB",
       "details": "Processing 8.1KB of HTML content with 400 HTML tags",
-      "score": 5,
+      "score": 3,
       "reliability": "LOW",
       "runs": [
         {
           "runNumber": 1,
-          "processingTime": 21.17734900000005,
-          "timestamp": "2025-07-08T20:48:40.350Z"
+          "processingTime": 18.819029,
+          "timestamp": "2025-07-08T22:51:36.172Z"
         },
         {
           "runNumber": 2,
-          "processingTime": 5.9057990000001155,
-          "timestamp": "2025-07-08T20:48:40.367Z"
+          "processingTime": 4.243812000000048,
+          "timestamp": "2025-07-08T22:51:36.188Z"
         },
         {
           "runNumber": 3,
-          "processingTime": 5.530314999999973,
-          "timestamp": "2025-07-08T20:48:40.382Z"
+          "processingTime": 3.5081019999998944,
+          "timestamp": "2025-07-08T22:51:36.201Z"
         },
         {
           "runNumber": 4,
-          "processingTime": 5.880500999999867,
-          "timestamp": "2025-07-08T20:48:40.399Z"
+          "processingTime": 3.1142830000000004,
+          "timestamp": "2025-07-08T22:51:36.215Z"
         },
         {
           "runNumber": 5,
-          "processingTime": 5.278652999999849,
-          "timestamp": "2025-07-08T20:48:40.414Z"
+          "processingTime": 3.1965880000000197,
+          "timestamp": "2025-07-08T22:51:36.228Z"
         },
         {
           "runNumber": 6,
-          "processingTime": 4.892618000000084,
-          "timestamp": "2025-07-08T20:48:40.429Z"
+          "processingTime": 2.936849999999936,
+          "timestamp": "2025-07-08T22:51:36.242Z"
         },
         {
           "runNumber": 7,
-          "processingTime": 4.998567000000094,
-          "timestamp": "2025-07-08T20:48:40.445Z"
+          "processingTime": 2.883790999999974,
+          "timestamp": "2025-07-08T22:51:36.255Z"
         },
         {
           "runNumber": 8,
-          "processingTime": 4.517994999999928,
-          "timestamp": "2025-07-08T20:48:40.460Z"
+          "processingTime": 3.02684899999997,
+          "timestamp": "2025-07-08T22:51:36.268Z"
         },
         {
           "runNumber": 9,
-          "processingTime": 4.1059529999999995,
-          "timestamp": "2025-07-08T20:48:40.475Z"
+          "processingTime": 3.874839999999949,
+          "timestamp": "2025-07-08T22:51:36.283Z"
         },
         {
           "runNumber": 10,
-          "processingTime": 3.5343199999999797,
-          "timestamp": "2025-07-08T20:48:40.489Z"
+          "processingTime": 3.2775590000001102,
+          "timestamp": "2025-07-08T22:51:36.297Z"
         }
       ]
     },
     {
       "name": "Large text content processing",
-      "averageTime": 2.3513235000000634,
-      "minTime": 2.0712550000000647,
-      "maxTime": 2.6870410000001357,
-      "standardDeviation": 0.21617981234494715,
-      "coefficient": 9.193962989139576,
+      "averageTime": 1.7476813749999849,
+      "minTime": 1.4639769999998862,
+      "maxTime": 1.9844229999998788,
+      "standardDeviation": 0.16236133919356796,
+      "coefficient": 9.290099529358969,
       "threshold": 50,
       "status": "PASS",
       "category": "processing",
       "description": "Text processing should be faster than HTML",
       "dataSize": "123.3KB",
       "details": "Processing 123.3KB of plain text with 19000 words",
-      "score": 5,
+      "score": 3,
       "reliability": "LOW",
       "runs": [
         {
           "runNumber": 1,
-          "processingTime": 2.0712550000000647,
-          "timestamp": "2025-07-08T20:48:40.504Z"
+          "processingTime": 2.1286740000000464,
+          "timestamp": "2025-07-08T22:51:36.312Z"
         },
         {
           "runNumber": 2,
-          "processingTime": 2.545906000000059,
-          "timestamp": "2025-07-08T20:48:40.517Z"
+          "processingTime": 1.6619980000000396,
+          "timestamp": "2025-07-08T22:51:36.323Z"
         },
         {
           "runNumber": 3,
-          "processingTime": 2.251312999999982,
-          "timestamp": "2025-07-08T20:48:40.529Z"
+          "processingTime": 1.7301360000001296,
+          "timestamp": "2025-07-08T22:51:36.335Z"
         },
         {
           "runNumber": 4,
-          "processingTime": 2.152418000000125,
-          "timestamp": "2025-07-08T20:48:40.542Z"
+          "processingTime": 1.59059400000001,
+          "timestamp": "2025-07-08T22:51:36.347Z"
         },
         {
           "runNumber": 5,
-          "processingTime": 2.372421000000031,
-          "timestamp": "2025-07-08T20:48:40.554Z"
+          "processingTime": 1.9320149999998648,
+          "timestamp": "2025-07-08T22:51:36.359Z"
         },
         {
           "runNumber": 6,
-          "processingTime": 2.6995540000000346,
-          "timestamp": "2025-07-08T20:48:40.567Z"
+          "processingTime": 1.7934649999999692,
+          "timestamp": "2025-07-08T22:51:36.371Z"
         },
         {
           "runNumber": 7,
-          "processingTime": 2.147779000000128,
-          "timestamp": "2025-07-08T20:48:40.579Z"
+          "processingTime": 1.9844229999998788,
+          "timestamp": "2025-07-08T22:51:36.384Z"
         },
         {
           "runNumber": 8,
-          "processingTime": 2.6870410000001357,
-          "timestamp": "2025-07-08T20:48:40.592Z"
+          "processingTime": 1.8248430000001008,
+          "timestamp": "2025-07-08T22:51:36.396Z"
         },
         {
           "runNumber": 9,
-          "processingTime": 1.9129789999999502,
-          "timestamp": "2025-07-08T20:48:40.605Z"
+          "processingTime": 1.3373189999999795,
+          "timestamp": "2025-07-08T22:51:36.408Z"
         },
         {
           "runNumber": 10,
-          "processingTime": 2.5824549999999817,
-          "timestamp": "2025-07-08T20:48:40.618Z"
+          "processingTime": 1.4639769999998862,
+          "timestamp": "2025-07-08T22:51:36.419Z"
         }
       ]
     },
     {
       "name": "Multiple re-renders (10 toggles)",
-      "averageTime": 1.0919986249999738,
-      "minTime": 0.9349939999999606,
-      "maxTime": 1.3845169999999598,
-      "standardDeviation": 0.14160878608068114,
-      "coefficient": 12.967853881746832,
+      "averageTime": 1.0739136249999603,
+      "minTime": 0.8899499999999989,
+      "maxTime": 1.3384510000000773,
+      "standardDeviation": 0.13415750868282492,
+      "coefficient": 12.492392829342291,
       "threshold": 200,
       "status": "PASS",
       "category": "reactivity",
@@ -167,131 +167,131 @@
       "runs": [
         {
           "runNumber": 1,
-          "processingTime": 2.387909000000036,
-          "timestamp": "2025-07-08T20:48:40.634Z"
+          "processingTime": 2.0852720000000318,
+          "timestamp": "2025-07-08T22:51:36.435Z"
         },
         {
           "runNumber": 2,
-          "processingTime": 1.115532999999914,
-          "timestamp": "2025-07-08T20:48:40.648Z"
+          "processingTime": 0.9796479999999974,
+          "timestamp": "2025-07-08T22:51:36.448Z"
         },
         {
           "runNumber": 3,
-          "processingTime": 1.212936000000127,
-          "timestamp": "2025-07-08T20:48:40.663Z"
+          "processingTime": 1.3384510000000773,
+          "timestamp": "2025-07-08T22:51:36.462Z"
         },
         {
           "runNumber": 4,
-          "processingTime": 1.3845169999999598,
-          "timestamp": "2025-07-08T20:48:40.677Z"
+          "processingTime": 1.2148499999998421,
+          "timestamp": "2025-07-08T22:51:36.475Z"
         },
         {
           "runNumber": 5,
-          "processingTime": 0.9431089999998221,
-          "timestamp": "2025-07-08T20:48:40.691Z"
+          "processingTime": 1.1123969999998735,
+          "timestamp": "2025-07-08T22:51:36.488Z"
         },
         {
           "runNumber": 6,
-          "processingTime": 0.8890980000001036,
-          "timestamp": "2025-07-08T20:48:40.704Z"
+          "processingTime": 1.0274069999998119,
+          "timestamp": "2025-07-08T22:51:36.502Z"
         },
         {
           "runNumber": 7,
-          "processingTime": 0.9818319999999403,
-          "timestamp": "2025-07-08T20:48:40.718Z"
+          "processingTime": 0.8247169999999642,
+          "timestamp": "2025-07-08T22:51:36.515Z"
         },
         {
           "runNumber": 8,
-          "processingTime": 1.0656690000000708,
-          "timestamp": "2025-07-08T20:48:40.732Z"
+          "processingTime": 0.8899499999999989,
+          "timestamp": "2025-07-08T22:51:36.528Z"
         },
         {
           "runNumber": 9,
-          "processingTime": 1.0973989999999958,
-          "timestamp": "2025-07-08T20:48:40.745Z"
+          "processingTime": 0.996089000000211,
+          "timestamp": "2025-07-08T22:51:36.541Z"
         },
         {
           "runNumber": 10,
-          "processingTime": 0.9349939999999606,
-          "timestamp": "2025-07-08T20:48:40.758Z"
+          "processingTime": 1.0325169999998707,
+          "timestamp": "2025-07-08T22:51:36.554Z"
         }
       ]
     },
     {
       "name": "Computed properties reactivity",
-      "averageTime": 2.110024750000008,
-      "minTime": 1.8502819999998792,
-      "maxTime": 2.3136500000000524,
-      "standardDeviation": 0.14840291778194512,
-      "coefficient": 7.03323114015343,
+      "averageTime": 1.2774606250000033,
+      "minTime": 1.178331000000071,
+      "maxTime": 1.5244800000000396,
+      "standardDeviation": 0.10634544598142005,
+      "coefficient": 8.32475333487635,
       "threshold": 100,
       "status": "PASS",
       "category": "reactivity",
       "description": "Reactive property updates should be fast",
       "dataSize": "6.1KB",
       "details": "Testing reactive updates with 6.1KB content across 3 property changes",
-      "score": 2,
+      "score": 1,
       "reliability": "LOW",
       "runs": [
         {
           "runNumber": 1,
-          "processingTime": 2.3136500000000524,
-          "timestamp": "2025-07-08T20:48:40.774Z"
+          "processingTime": 2.8865759999998772,
+          "timestamp": "2025-07-08T22:51:36.572Z"
         },
         {
           "runNumber": 2,
-          "processingTime": 2.044736000000057,
-          "timestamp": "2025-07-08T20:48:40.790Z"
+          "processingTime": 1.3166400000000067,
+          "timestamp": "2025-07-08T22:51:36.587Z"
         },
         {
           "runNumber": 3,
-          "processingTime": 2.0560169999998834,
-          "timestamp": "2025-07-08T20:48:40.805Z"
+          "processingTime": 1.1884000000000015,
+          "timestamp": "2025-07-08T22:51:36.600Z"
         },
         {
           "runNumber": 4,
-          "processingTime": 2.0969740000000456,
-          "timestamp": "2025-07-08T20:48:40.821Z"
+          "processingTime": 1.3193360000000212,
+          "timestamp": "2025-07-08T22:51:36.613Z"
         },
         {
           "runNumber": 5,
-          "processingTime": 2.308770999999979,
-          "timestamp": "2025-07-08T20:48:40.836Z"
+          "processingTime": 1.5244800000000396,
+          "timestamp": "2025-07-08T22:51:36.627Z"
         },
         {
           "runNumber": 6,
-          "processingTime": 2.2057680000000346,
-          "timestamp": "2025-07-08T20:48:40.852Z"
+          "processingTime": 1.2501049999998486,
+          "timestamp": "2025-07-08T22:51:36.641Z"
         },
         {
           "runNumber": 7,
-          "processingTime": 3.3343560000000707,
-          "timestamp": "2025-07-08T20:48:40.867Z"
+          "processingTime": 1.178331000000071,
+          "timestamp": "2025-07-08T22:51:36.654Z"
         },
         {
           "runNumber": 8,
-          "processingTime": 1.7601320000001124,
-          "timestamp": "2025-07-08T20:48:40.882Z"
+          "processingTime": 1.1954129999999168,
+          "timestamp": "2025-07-08T22:51:36.668Z"
         },
         {
           "runNumber": 9,
-          "processingTime": 1.8502819999998792,
-          "timestamp": "2025-07-08T20:48:40.897Z"
+          "processingTime": 1.1536049999999705,
+          "timestamp": "2025-07-08T22:51:36.681Z"
         },
         {
           "runNumber": 10,
-          "processingTime": 2.004000000000133,
-          "timestamp": "2025-07-08T20:48:40.912Z"
+          "processingTime": 1.2469800000001214,
+          "timestamp": "2025-07-08T22:51:36.695Z"
         }
       ]
     },
     {
       "name": "HTML sanitization overhead",
-      "averageTime": 1.7456686250000075,
-      "minTime": 1.5300709999999071,
-      "maxTime": 2.1746989999999187,
-      "standardDeviation": 0.24267164242291703,
-      "coefficient": 13.901357849226164,
+      "averageTime": 1.6280719999999462,
+      "minTime": 1.1516899999999168,
+      "maxTime": 1.9919770000001336,
+      "standardDeviation": 0.2249920201774321,
+      "coefficient": 13.819537476072282,
       "threshold": 150,
       "status": "PASS",
       "category": "sanitization",
@@ -303,131 +303,131 @@
       "runs": [
         {
           "runNumber": 1,
-          "processingTime": 2.3649370000000545,
-          "timestamp": "2025-07-08T20:48:40.927Z"
+          "processingTime": 1.9919770000001336,
+          "timestamp": "2025-07-08T22:51:36.708Z"
         },
         {
           "runNumber": 2,
-          "processingTime": 2.1746989999999187,
-          "timestamp": "2025-07-08T20:48:40.939Z"
+          "processingTime": 1.5705069999999068,
+          "timestamp": "2025-07-08T22:51:36.720Z"
         },
         {
           "runNumber": 3,
-          "processingTime": 1.9567409999999654,
-          "timestamp": "2025-07-08T20:48:40.951Z"
+          "processingTime": 1.6250589999999647,
+          "timestamp": "2025-07-08T22:51:36.732Z"
         },
         {
           "runNumber": 4,
-          "processingTime": 1.3013809999999921,
-          "timestamp": "2025-07-08T20:48:40.963Z"
+          "processingTime": 1.1516899999999168,
+          "timestamp": "2025-07-08T22:51:36.744Z"
         },
         {
           "runNumber": 5,
-          "processingTime": 1.6158920000000307,
-          "timestamp": "2025-07-08T20:48:40.974Z"
+          "processingTime": 1.7289040000000568,
+          "timestamp": "2025-07-08T22:51:36.756Z"
         },
         {
           "runNumber": 6,
-          "processingTime": 1.5340679999999338,
-          "timestamp": "2025-07-08T20:48:40.986Z"
+          "processingTime": 0.8412290000001121,
+          "timestamp": "2025-07-08T22:51:36.767Z"
         },
         {
           "runNumber": 7,
-          "processingTime": 1.5524720000000798,
-          "timestamp": "2025-07-08T20:48:40.998Z"
+          "processingTime": 1.5724699999998393,
+          "timestamp": "2025-07-08T22:51:36.778Z"
         },
         {
           "runNumber": 8,
-          "processingTime": 1.5300709999999071,
-          "timestamp": "2025-07-08T20:48:41.009Z"
+          "processingTime": 1.5898729999998977,
+          "timestamp": "2025-07-08T22:51:36.790Z"
         },
         {
           "runNumber": 9,
-          "processingTime": 2.014029000000164,
-          "timestamp": "2025-07-08T20:48:41.022Z"
+          "processingTime": 2.1181450000001405,
+          "timestamp": "2025-07-08T22:51:36.803Z"
         },
         {
           "runNumber": 10,
-          "processingTime": 1.5873770000000604,
-          "timestamp": "2025-07-08T20:48:41.034Z"
+          "processingTime": 1.794095999999854,
+          "timestamp": "2025-07-08T22:51:36.815Z"
         }
       ]
     },
     {
       "name": "Memory usage (20 components)",
-      "averageTime": 24.07106724999997,
-      "minTime": 22.691679000000022,
-      "maxTime": 25.22759700000006,
-      "standardDeviation": 0.9579073363223388,
-      "coefficient": 3.9794967392745746,
+      "averageTime": 16.05646637500007,
+      "minTime": 12.00807900000018,
+      "maxTime": 20.80708800000002,
+      "standardDeviation": 2.462097556730981,
+      "coefficient": 15.333993789346255,
       "threshold": 500,
       "status": "PASS",
       "category": "memory",
       "description": "Creating multiple components should not cause memory issues",
       "dataSize": "4.0KB × 20",
       "details": "Created 20 components with 4.0KB each",
-      "score": 5,
+      "score": 3,
       "reliability": "LOW",
       "runs": [
         {
           "runNumber": 1,
-          "processingTime": 27.479802000000063,
-          "timestamp": "2025-07-08T20:48:41.074Z"
+          "processingTime": 20.80708800000002,
+          "timestamp": "2025-07-08T22:51:36.849Z"
         },
         {
           "runNumber": 2,
-          "processingTime": 22.991771999999855,
-          "timestamp": "2025-07-08T20:48:41.110Z"
+          "processingTime": 15.33422100000007,
+          "timestamp": "2025-07-08T22:51:36.879Z"
         },
         {
           "runNumber": 3,
-          "processingTime": 25.09305399999994,
-          "timestamp": "2025-07-08T20:48:41.147Z"
+          "processingTime": 15.952219000000014,
+          "timestamp": "2025-07-08T22:51:36.907Z"
         },
         {
           "runNumber": 4,
-          "processingTime": 24.362194000000045,
-          "timestamp": "2025-07-08T20:48:41.184Z"
+          "processingTime": 14.33224999999993,
+          "timestamp": "2025-07-08T22:51:36.933Z"
         },
         {
           "runNumber": 5,
-          "processingTime": 23.80657199999996,
-          "timestamp": "2025-07-08T20:48:41.220Z"
+          "processingTime": 21.81768500000021,
+          "timestamp": "2025-07-08T22:51:36.967Z"
         },
         {
           "runNumber": 6,
-          "processingTime": 21.68660399999999,
-          "timestamp": "2025-07-08T20:48:41.256Z"
+          "processingTime": 17.818902000000207,
+          "timestamp": "2025-07-08T22:51:36.997Z"
         },
         {
           "runNumber": 7,
-          "processingTime": 25.22759700000006,
-          "timestamp": "2025-07-08T20:48:41.295Z"
+          "processingTime": 17.308254000000034,
+          "timestamp": "2025-07-08T22:51:37.026Z"
         },
         {
           "runNumber": 8,
-          "processingTime": 23.27473400000008,
-          "timestamp": "2025-07-08T20:48:41.330Z"
+          "processingTime": 14.890718000000106,
+          "timestamp": "2025-07-08T22:51:37.056Z"
         },
         {
           "runNumber": 9,
-          "processingTime": 25.1209359999998,
-          "timestamp": "2025-07-08T20:48:41.367Z"
+          "processingTime": 11.51634799999988,
+          "timestamp": "2025-07-08T22:51:37.079Z"
         },
         {
           "runNumber": 10,
-          "processingTime": 22.691679000000022,
-          "timestamp": "2025-07-08T20:48:41.402Z"
+          "processingTime": 12.00807900000018,
+          "timestamp": "2025-07-08T22:51:37.103Z"
         }
       ]
     },
     {
       "name": "Edge case: extremely long word",
-      "averageTime": 1.4003232499999854,
-      "minTime": 1.0805270000000746,
-      "maxTime": 1.5387369999998555,
-      "standardDeviation": 0.15044341115576168,
-      "coefficient": 10.743477347516956,
+      "averageTime": 1.3340893749999907,
+      "minTime": 1.1172760000001745,
+      "maxTime": 1.5212240000000747,
+      "standardDeviation": 0.13583256855584422,
+      "coefficient": 10.181669317008478,
       "threshold": 50,
       "status": "PASS",
       "category": "edge-case",
@@ -439,63 +439,63 @@
       "runs": [
         {
           "runNumber": 1,
-          "processingTime": 1.0805270000000746,
-          "timestamp": "2025-07-08T20:48:41.414Z"
+          "processingTime": 1.5212240000000747,
+          "timestamp": "2025-07-08T22:51:37.117Z"
         },
         {
           "runNumber": 2,
-          "processingTime": 1.247569999999996,
-          "timestamp": "2025-07-08T20:48:41.426Z"
+          "processingTime": 1.2400569999999789,
+          "timestamp": "2025-07-08T22:51:37.128Z"
         },
         {
           "runNumber": 3,
-          "processingTime": 1.504873000000316,
-          "timestamp": "2025-07-08T20:48:41.438Z"
+          "processingTime": 1.2387039999998706,
+          "timestamp": "2025-07-08T22:51:37.140Z"
         },
         {
           "runNumber": 4,
-          "processingTime": 1.4300829999997404,
-          "timestamp": "2025-07-08T20:48:41.449Z"
+          "processingTime": 1.3383609999998498,
+          "timestamp": "2025-07-08T22:51:37.151Z"
         },
         {
           "runNumber": 5,
-          "processingTime": 1.3806899999999587,
-          "timestamp": "2025-07-08T20:48:41.461Z"
+          "processingTime": 1.1172760000001745,
+          "timestamp": "2025-07-08T22:51:37.162Z"
         },
         {
           "runNumber": 6,
-          "processingTime": 1.5133089999999356,
-          "timestamp": "2025-07-08T20:48:41.473Z"
+          "processingTime": 1.5157339999998385,
+          "timestamp": "2025-07-08T22:51:37.174Z"
         },
         {
           "runNumber": 7,
-          "processingTime": 1.5387369999998555,
-          "timestamp": "2025-07-08T20:48:41.484Z"
+          "processingTime": 1.4345620000001418,
+          "timestamp": "2025-07-08T22:51:37.186Z"
         },
         {
           "runNumber": 8,
-          "processingTime": 0.9241539999998167,
-          "timestamp": "2025-07-08T20:48:41.496Z"
+          "processingTime": 1.8704689999999573,
+          "timestamp": "2025-07-08T22:51:37.199Z"
         },
         {
           "runNumber": 9,
-          "processingTime": 1.7089460000001964,
-          "timestamp": "2025-07-08T20:48:41.507Z"
+          "processingTime": 1.2667969999999968,
+          "timestamp": "2025-07-08T22:51:37.211Z"
         },
         {
           "runNumber": 10,
-          "processingTime": 1.506797000000006,
-          "timestamp": "2025-07-08T20:48:41.519Z"
+          "processingTime": 1.0728930000000219,
+          "timestamp": "2025-07-08T22:51:37.223Z"
         }
       ]
     },
     {
       "name": "Concurrent component creation",
-      "averageTime": 11.178265624999938,
-      "minTime": 9.549925999999687,
-      "maxTime": 12.967005999999856,
-      "standardDeviation": 1.3989180360273394,
-      "coefficient": 12.514625103367475,
+      "averageTime": 8.235486625000107,
+      "minTime": 6.960078999999951,
+      "maxTime": 9.459929000000102,
+      "standardDeviation": 0.7747167143753599,
+      "coefficient": 9.407054490545661,
       "threshold": 500,
       "status": "PASS",
       "category": "processing",
@@ -507,121 +507,121 @@
       "runs": [
         {
           "runNumber": 1,
-          "processingTime": 9.549925999999687,
-          "timestamp": "2025-07-08T20:48:41.540Z"
+          "processingTime": 9.459929000000102,
+          "timestamp": "2025-07-08T22:51:37.244Z"
         },
         {
           "runNumber": 2,
-          "processingTime": 12.423956999999973,
-          "timestamp": "2025-07-08T20:48:41.563Z"
+          "processingTime": 7.963922000000139,
+          "timestamp": "2025-07-08T22:51:37.262Z"
         },
         {
           "runNumber": 3,
-          "processingTime": 9.57165699999996,
-          "timestamp": "2025-07-08T20:48:41.583Z"
+          "processingTime": 6.960078999999951,
+          "timestamp": "2025-07-08T22:51:37.279Z"
         },
         {
           "runNumber": 4,
-          "processingTime": 12.2324279999998,
-          "timestamp": "2025-07-08T20:48:41.605Z"
+          "processingTime": 8.87039300000015,
+          "timestamp": "2025-07-08T22:51:37.299Z"
         },
         {
           "runNumber": 5,
-          "processingTime": 9.35975899999994,
-          "timestamp": "2025-07-08T20:48:41.625Z"
+          "processingTime": 9.040201000000252,
+          "timestamp": "2025-07-08T22:51:37.318Z"
         },
         {
           "runNumber": 6,
-          "processingTime": 12.590299999999843,
-          "timestamp": "2025-07-08T20:48:41.648Z"
+          "processingTime": 6.567242000000078,
+          "timestamp": "2025-07-08T22:51:37.335Z"
         },
         {
           "runNumber": 7,
-          "processingTime": 10.04515500000025,
-          "timestamp": "2025-07-08T20:48:41.668Z"
+          "processingTime": 7.948143000000073,
+          "timestamp": "2025-07-08T22:51:37.354Z"
         },
         {
           "runNumber": 8,
-          "processingTime": 13.10787100000016,
-          "timestamp": "2025-07-08T20:48:41.692Z"
+          "processingTime": 8.069950999999946,
+          "timestamp": "2025-07-08T22:51:37.372Z"
         },
         {
           "runNumber": 9,
-          "processingTime": 10.045696000000135,
-          "timestamp": "2025-07-08T20:48:41.712Z"
+          "processingTime": 7.571275000000242,
+          "timestamp": "2025-07-08T22:51:37.390Z"
         },
         {
           "runNumber": 10,
-          "processingTime": 12.967005999999856,
-          "timestamp": "2025-07-08T20:48:41.735Z"
+          "processingTime": 10.131808999999976,
+          "timestamp": "2025-07-08T22:51:37.410Z"
         }
       ]
     },
     {
       "name": "Complex HTML structure",
-      "averageTime": 3.4197565000000054,
-      "minTime": 2.7823699999999008,
-      "maxTime": 4.34393,
-      "standardDeviation": 0.53729612823988,
-      "coefficient": 15.711531749113691,
+      "averageTime": 2.168841499999985,
+      "minTime": 1.9070480000000316,
+      "maxTime": 2.552147999999761,
+      "standardDeviation": 0.2197671998415814,
+      "coefficient": 10.132930407389518,
       "threshold": 200,
       "status": "PASS",
       "category": "processing",
       "description": "Complex nested HTML should be processed efficiently",
       "dataSize": "12.8KB",
       "details": "Processing 12.8KB complex nested HTML with 360 tags",
-      "score": 2,
+      "score": 1,
       "reliability": "LOW",
       "runs": [
         {
           "runNumber": 1,
-          "processingTime": 5.8747809999999845,
-          "timestamp": "2025-07-08T20:48:41.753Z"
+          "processingTime": 6.420526000000336,
+          "timestamp": "2025-07-08T22:51:37.427Z"
         },
         {
           "runNumber": 2,
-          "processingTime": 3.1711190000000897,
-          "timestamp": "2025-07-08T20:48:41.766Z"
+          "processingTime": 1.6953710000002502,
+          "timestamp": "2025-07-08T22:51:37.439Z"
         },
         {
           "runNumber": 3,
-          "processingTime": 3.9370550000003277,
-          "timestamp": "2025-07-08T20:48:41.781Z"
+          "processingTime": 2.552147999999761,
+          "timestamp": "2025-07-08T22:51:37.452Z"
         },
         {
           "runNumber": 4,
-          "processingTime": 4.34393,
-          "timestamp": "2025-07-08T20:48:41.795Z"
+          "processingTime": 2.1339130000001205,
+          "timestamp": "2025-07-08T22:51:37.464Z"
         },
         {
           "runNumber": 5,
-          "processingTime": 2.6671239999996033,
-          "timestamp": "2025-07-08T20:48:41.809Z"
+          "processingTime": 2.1606230000002142,
+          "timestamp": "2025-07-08T22:51:37.477Z"
         },
         {
           "runNumber": 6,
-          "processingTime": 2.959711999999854,
-          "timestamp": "2025-07-08T20:48:41.822Z"
+          "processingTime": 1.918568999999934,
+          "timestamp": "2025-07-08T22:51:37.490Z"
         },
         {
           "runNumber": 7,
-          "processingTime": 2.928824000000077,
-          "timestamp": "2025-07-08T20:48:41.836Z"
+          "processingTime": 2.3396899999997913,
+          "timestamp": "2025-07-08T22:51:37.502Z"
         },
         {
           "runNumber": 8,
-          "processingTime": 2.7823699999999008,
-          "timestamp": "2025-07-08T20:48:41.849Z"
+          "processingTime": 1.9070480000000316,
+          "timestamp": "2025-07-08T22:51:37.514Z"
         },
         {
           "runNumber": 9,
-          "processingTime": 3.3102399999997942,
-          "timestamp": "2025-07-08T20:48:41.862Z"
+          "processingTime": 1.9721300000001065,
+          "timestamp": "2025-07-08T22:51:37.527Z"
         },
         {
           "runNumber": 10,
-          "processingTime": 3.9248019999999997,
-          "timestamp": "2025-07-08T20:48:41.876Z"
+          "processingTime": 2.3666109999999208,
+          "timestamp": "2025-07-08T22:51:37.539Z"
         }
       ]
     }
