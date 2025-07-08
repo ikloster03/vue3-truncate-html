@@ -16,11 +16,7 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   testMatch: [
-    '**/*.test.(js|jsx|ts|tsx)',
-  ],
-  testPathIgnorePatterns: [
-    '/node_modules/',
-    '.*/performance.*\\.test\\.(js|jsx|ts|tsx)$',
+    '**/performance*.test.(js|jsx|ts|tsx)',
   ],
   roots: [
     '<rootDir>/src',
@@ -29,9 +25,5 @@ module.exports = {
   testEnvironmentOptions: {
     customExportConditions: ['node', 'node-addons'],
   },
-  // collectCoverage: true,
-  // collectCoverageFrom: [
-  //   'src/**/*.{ts,js,vue}',
-  //   '!src/index.ts',
-  // ],
+  collectCoverage: false,
 };
