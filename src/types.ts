@@ -14,3 +14,11 @@ export type Classes = {
   buttonMore: string
   buttonLess: string
 }
+
+export interface ProcessedContent {
+  isHTML: boolean;
+  displayText: string;
+  showButton: boolean;
+  buttonTitle: string;
+  buttonClass: string;
+}

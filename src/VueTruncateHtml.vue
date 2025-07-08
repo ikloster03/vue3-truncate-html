@@ -28,87 +28,14 @@ import {
   PropType,
 } from 'vue';
 import htmlTruncate from 'html-truncate';
-import sanitizeHtml, { IOptions } from 'sanitize-html';
-import { Classes, Buttons, Type } from './types';
-import { defaultClasses, defaultButtons, HTML } from './const';
-
-// Кеш для санитизации
-const sanitizeCache = new Map<string, string>();
-const MAX_CACHE_SIZE = 100;
-
-// Безопасные настройки санитизации по умолчанию
-const DEFAULT_SANITIZE_OPTIONS: IOptions = {
-  allowedTags: [
-    'p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div',
-    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-    'ul', 'ol', 'li',
-    'blockquote', 'pre', 'code',
-    'a',
-  ],
-  allowedAttributes: {
-    a: ['href', 'title', 'target'],
-    '*': ['class', 'style'],
-  },
-  allowedSchemes: ['http', 'https', 'mailto'],
-  allowedSchemesByTag: {
-    a: ['http', 'https', 'mailto'],
-  },
-  allowProtocolRelative: false,
-  disallowedTagsMode: 'discard',
-  enforceHtmlBoundary: true,
-};
-
-// Оптимизированная функция санитизации с кешированием
-function sanitizeWithCache(text: string, options: IOptions, isHTML: boolean): string {
-  const cacheKey = `${text}_${JSON.stringify(options)}_${isHTML}`;
-
-  if (sanitizeCache.has(cacheKey)) {
-    return sanitizeCache.get(cacheKey)!;
-  }
-
-  // Очистка кеша при превышении лимита
-  if (sanitizeCache.size >= MAX_CACHE_SIZE) {
-    const firstKey = sanitizeCache.keys().next().value;
-
-    if (firstKey) {
-      sanitizeCache.delete(firstKey);
-    }
-  }
-
-  let result: string;
-
-  try {
-    if (isHTML) {
-      result = sanitizeHtml(text, options);
-    } else {
-      // Для текста применяем базовую санитизацию
-      result = sanitizeHtml(text, {
-        allowedTags: [],
-        allowedAttributes: {},
-        disallowedTagsMode: 'escape',
-      });
-    }
-  } catch {
-    result = '';
-  }
-
-  sanitizeCache.set(cacheKey, result);
-
-  return result;
-}
-
-// Оптимизированная функция удаления HTML тегов
-function stripHtmlTags(text: string): string {
-  return text.replace(/<[^>]*>/g, '').trim();
-}
-
-interface ProcessedContent {
-  isHTML: boolean;
-  displayText: string;
-  showButton: boolean;
-  buttonTitle: string;
-  buttonClass: string;
-}
+import { IOptions } from 'sanitize-html';
+import {
+  Classes, Buttons, Type, ProcessedContent,
+} from './types';
+import {
+  defaultClasses, defaultButtons, HTML, DEFAULT_SANITIZE_OPTIONS,
+} from './const';
+import { sanitizeWithCache, stripHtmlTags } from './utils';
 
 export default defineComponent({
   name: 'VueTruncateHtml',
@@ -198,8 +125,8 @@ export default defineComponent({
 
       // Класс кнопки
       const buttonClass = isTruncated.value
-        ? props.classes?.buttonMore ?? defaultClasses.buttonMore
-        : props.classes?.buttonLess ?? defaultClasses.buttonLess;
+        ? props.classes.buttonMore ?? defaultClasses.buttonMore
+        : props.classes.buttonLess ?? defaultClasses.buttonLess;
 
       return {
         isHTML,
@@ -210,15 +137,13 @@ export default defineComponent({
       };
     });
 
-    // Объединенные классы
+    // Объединенное computed property для классов
     const proxyClasses = computed(() => ({
-      container: props.classes?.container ?? defaultClasses.container,
-      content: props.classes?.content ?? defaultClasses.content,
-      contentHtml: props.classes?.contentHtml ?? defaultClasses.contentHtml,
-      contentText: props.classes?.contentText ?? defaultClasses.contentText,
-      button: props.classes?.button ?? defaultClasses.button,
-      buttonMore: props.classes?.buttonMore ?? defaultClasses.buttonMore,
-      buttonLess: props.classes?.buttonLess ?? defaultClasses.buttonLess,
+      container: props.classes.container ?? defaultClasses.container,
+      content: props.classes.content ?? defaultClasses.content,
+      contentHtml: props.classes.contentHtml ?? defaultClasses.contentHtml,
+      contentText: props.classes.contentText ?? defaultClasses.contentText,
+      button: props.classes.button ?? defaultClasses.button,
     }));
 
     const toggle = () => {
