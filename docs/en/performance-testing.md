@@ -19,13 +19,23 @@ docs/
 
 ## Available Commands
 
-### Multi-run Tests
-- `npm run test:performance:multi` - Multi-run tests with enhanced statistics
-- `npm run test:performance:multi:quiet` - Quiet mode for multi-run tests
-- `npm run test:performance:multi:report` - Detailed report with reliability analysis
+### Main Performance Testing Commands
+- `npm run test:performance` - Run performance tests with verbose output
+- `npm run test:performance:quiet` - Quiet mode for performance tests
+- `npm run test:performance:report` - Detailed report with reliability analysis
+
+### Regular Tests (excluded from performance)
+- `npm test` - Run only functional tests (without performance)
+- `npm run test:watch` - Watch mode for changes
+- `npm run test:coverage` - Tests with code coverage
 
 ### HTML Performance Delta Reports
 - `node scripts/performance-delta-report.js` - Generate HTML report with change visualization
+
+### Test Separation
+The testing system is divided into two types:
+- **Functional tests** (`npm test`) - fast functionality tests
+- **Performance tests** (`npm run test:performance`) - slow performance tests
 
 ## Test Categories
 
@@ -124,15 +134,15 @@ export const PERFORMANCE_CONFIG = {
 
 ### HTML Report Generation
 ```bash
-# Run multi-run tests (generates performance-delta.json)
-npm run test:performance:multi
+# Run performance tests (generates performance-delta.json)
+npm run test:performance
 
 # Generate HTML report
 node scripts/performance-delta-report.js
 ```
 
 ### Automatic Notifications
-After running multi-run tests, the system automatically:
+After running performance tests, the system automatically:
 - Generates `performance-delta.json`
 - Shows hint about HTML report generation
 - Displays brief change summary in console
@@ -192,7 +202,7 @@ performance-multi-report.html
 ## Recommendations
 
 1. **Regular monitoring**: Run tests after each change
-2. **Multi-run tests**: Use `test:performance:multi` for critical changes
+2. **Performance tests**: Use `npm run test:performance` for critical changes
 3. **HTML reports**: Use HTML reports for visual change analysis
 4. **Trend analysis**: Track performance changes over time
 5. **Optimization**: Pay attention to tests with low reliability
@@ -204,7 +214,7 @@ performance-multi-report.html
 ### Typical Workflow
 ```bash
 # 1. Run basic tests
-npm run test:performance:multi
+npm run test:performance
 
 # 2. Generate HTML report
 node scripts/performance-delta-report.js
@@ -213,14 +223,14 @@ node scripts/performance-delta-report.js
 # Open performance-delta.html in browser
 
 # 4. For detailed analysis if needed
-npm run test:performance:multi:report
+npm run test:performance:report
 ```
 
 ### CI/CD Integration
 ```yaml
 # Example for GitHub Actions
 - name: Run performance tests
-  run: npm run test:performance:multi
+  run: npm run test:performance
 
 - name: Generate HTML report
   run: node scripts/performance-delta-report.js
@@ -232,7 +242,6 @@ npm run test:performance:multi:report
     path: |
       performance-delta.html
       performance-delta.json
-      performance-multi-report.json
 ```
 
 ## Support
@@ -242,7 +251,7 @@ For performance testing issues:
 1. Check configuration correctness in `performance.config.ts`
 2. Ensure all dependencies are installed
 3. Check logs for errors
-4. Use `npm run test:performance:multi` for more detailed analysis
+4. Use `npm run test:performance` for more detailed analysis
 5. Check file permissions for `scripts/performance-delta-report.js`
 
 ## Versioning

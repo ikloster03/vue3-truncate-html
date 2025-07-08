@@ -19,13 +19,23 @@ docs/
 
 ## Доступные команды
 
-### Множественные тесты
-- `npm run test:performance:multi` - Множественные тесты с улучшенной статистикой
-- `npm run test:performance:multi:quiet` - Тихий режим для множественных тестов
-- `npm run test:performance:multi:report` - Подробный отчет с анализом надежности
+### Основные команды тестирования производительности
+- `npm run test:performance` - Запуск тестов производительности с подробным выводом
+- `npm run test:performance:quiet` - Тихий режим для тестов производительности
+- `npm run test:performance:report` - Подробный отчет с анализом надежности
+
+### Обычные тесты (исключены из производительности)
+- `npm test` - Запуск только функциональных тестов (без производительности)
+- `npm run test:watch` - Режим наблюдения за изменениями
+- `npm run test:coverage` - Тесты с покрытием кода
 
 ### HTML-отчеты дельты производительности
 - `node scripts/performance-delta-report.js` - Генерация HTML-отчета с визуализацией изменений
+
+### Разделение тестов
+Система тестирования разделена на два типа:
+- **Функциональные тесты** (`npm test`) - быстрые тесты функциональности
+- **Тесты производительности** (`npm run test:performance`) - медленные тесты производительности
 
 ## Категории тестов
 
@@ -96,15 +106,15 @@ docs/
 
 ### Генерация HTML-отчетов
 ```bash
-# Запуск множественных тестов (генерирует performance-delta.json)
-npm run test:performance:multi
+# Запуск тестов производительности (генерирует performance-delta.json)
+npm run test:performance
 
 # Генерация HTML-отчета
 node scripts/performance-delta-report.js
 ```
 
 ### Автоматическое уведомление
-После запуска множественных тестов система автоматически:
+После запуска тестов производительности система автоматически:
 - Генерирует `performance-delta.json`
 - Выводит подсказку о генерации HTML-отчета
 - Показывает краткую сводку изменений в консоли
@@ -189,7 +199,7 @@ performance-multi-report.html
 ## Рекомендации
 
 1. **Регулярный мониторинг**: Запускайте тесты после каждого изменения
-2. **Множественные тесты**: Используйте `test:performance:multi` для критических изменений
+2. **Тесты производительности**: Используйте `npm run test:performance` для критических изменений
 3. **HTML-отчеты**: Используйте HTML-отчеты для визуального анализа изменений
 4. **Анализ трендов**: Отслеживайте изменения производительности во времени
 5. **Оптимизация**: Обращайте внимание на тесты с низкой надежностью
@@ -201,7 +211,7 @@ performance-multi-report.html
 ### Типичный рабочий процесс
 ```bash
 # 1. Запуск базовых тестов
-npm run test:performance:multi
+npm run test:performance
 
 # 2. Генерация HTML-отчета
 node scripts/performance-delta-report.js
@@ -210,14 +220,14 @@ node scripts/performance-delta-report.js
 # Откройте performance-delta.html в браузере
 
 # 4. При необходимости детального анализа
-npm run test:performance:multi:report
+npm run test:performance:report
 ```
 
 ### Интеграция в CI/CD
 ```yaml
 # Пример для GitHub Actions
 - name: Run performance tests
-  run: npm run test:performance:multi
+  run: npm run test:performance
 
 - name: Generate HTML report
   run: node scripts/performance-delta-report.js
@@ -229,7 +239,6 @@ npm run test:performance:multi:report
     path: |
       performance-delta.html
       performance-delta.json
-      performance-multi-report.json
 ```
 
 ## Поддержка
@@ -239,7 +248,7 @@ npm run test:performance:multi:report
 1. Проверьте корректность конфигурации в `performance.config.ts`
 2. Убедитесь, что все зависимости установлены
 3. Проверьте логи на наличие ошибок
-4. Используйте `npm run test:performance:multi` для более детального анализа
+4. Используйте `npm run test:performance` для более детального анализа
 5. Проверьте права доступа к файлу `scripts/performance-delta-report.js`
 
 ## Версионирование
