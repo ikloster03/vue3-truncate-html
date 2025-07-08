@@ -1,0 +1,629 @@
+{
+  "summary": {
+    "totalTests": 9,
+    "passed": 9,
+    "failed": 0,
+    "unstable": 0,
+    "overallStatus": "PASS",
+    "timestamp": "2025-07-08T20:48:41.888Z",
+    "totalDuration": 52.50722824999994,
+    "averageDuration": 5.834136472222216,
+    "score": 97,
+    "reliability": "LOW",
+    "runsPerTest": 10
+  },
+  "results": [
+    {
+      "name": "Large HTML content processing",
+      "averageTime": 5.138800124999989,
+      "minTime": 4.1059529999999995,
+      "maxTime": 5.9057990000001155,
+      "standardDeviation": 0.5962060613876311,
+      "coefficient": 11.602048082919598,
+      "threshold": 100,
+      "status": "PASS",
+      "category": "processing",
+      "description": "Processing large HTML content should be fast",
+      "dataSize": "8.1KB",
+      "details": "Processing 8.1KB of HTML content with 400 HTML tags",
+      "score": 5,
+      "reliability": "LOW",
+      "runs": [
+        {
+          "runNumber": 1,
+          "processingTime": 21.17734900000005,
+          "timestamp": "2025-07-08T20:48:40.350Z"
+        },
+        {
+          "runNumber": 2,
+          "processingTime": 5.9057990000001155,
+          "timestamp": "2025-07-08T20:48:40.367Z"
+        },
+        {
+          "runNumber": 3,
+          "processingTime": 5.530314999999973,
+          "timestamp": "2025-07-08T20:48:40.382Z"
+        },
+        {
+          "runNumber": 4,
+          "processingTime": 5.880500999999867,
+          "timestamp": "2025-07-08T20:48:40.399Z"
+        },
+        {
+          "runNumber": 5,
+          "processingTime": 5.278652999999849,
+          "timestamp": "2025-07-08T20:48:40.414Z"
+        },
+        {
+          "runNumber": 6,
+          "processingTime": 4.892618000000084,
+          "timestamp": "2025-07-08T20:48:40.429Z"
+        },
+        {
+          "runNumber": 7,
+          "processingTime": 4.998567000000094,
+          "timestamp": "2025-07-08T20:48:40.445Z"
+        },
+        {
+          "runNumber": 8,
+          "processingTime": 4.517994999999928,
+          "timestamp": "2025-07-08T20:48:40.460Z"
+        },
+        {
+          "runNumber": 9,
+          "processingTime": 4.1059529999999995,
+          "timestamp": "2025-07-08T20:48:40.475Z"
+        },
+        {
+          "runNumber": 10,
+          "processingTime": 3.5343199999999797,
+          "timestamp": "2025-07-08T20:48:40.489Z"
+        }
+      ]
+    },
+    {
+      "name": "Large text content processing",
+      "averageTime": 2.3513235000000634,
+      "minTime": 2.0712550000000647,
+      "maxTime": 2.6870410000001357,
+      "standardDeviation": 0.21617981234494715,
+      "coefficient": 9.193962989139576,
+      "threshold": 50,
+      "status": "PASS",
+      "category": "processing",
+      "description": "Text processing should be faster than HTML",
+      "dataSize": "123.3KB",
+      "details": "Processing 123.3KB of plain text with 19000 words",
+      "score": 5,
+      "reliability": "LOW",
+      "runs": [
+        {
+          "runNumber": 1,
+          "processingTime": 2.0712550000000647,
+          "timestamp": "2025-07-08T20:48:40.504Z"
+        },
+        {
+          "runNumber": 2,
+          "processingTime": 2.545906000000059,
+          "timestamp": "2025-07-08T20:48:40.517Z"
+        },
+        {
+          "runNumber": 3,
+          "processingTime": 2.251312999999982,
+          "timestamp": "2025-07-08T20:48:40.529Z"
+        },
+        {
+          "runNumber": 4,
+          "processingTime": 2.152418000000125,
+          "timestamp": "2025-07-08T20:48:40.542Z"
+        },
+        {
+          "runNumber": 5,
+          "processingTime": 2.372421000000031,
+          "timestamp": "2025-07-08T20:48:40.554Z"
+        },
+        {
+          "runNumber": 6,
+          "processingTime": 2.6995540000000346,
+          "timestamp": "2025-07-08T20:48:40.567Z"
+        },
+        {
+          "runNumber": 7,
+          "processingTime": 2.147779000000128,
+          "timestamp": "2025-07-08T20:48:40.579Z"
+        },
+        {
+          "runNumber": 8,
+          "processingTime": 2.6870410000001357,
+          "timestamp": "2025-07-08T20:48:40.592Z"
+        },
+        {
+          "runNumber": 9,
+          "processingTime": 1.9129789999999502,
+          "timestamp": "2025-07-08T20:48:40.605Z"
+        },
+        {
+          "runNumber": 10,
+          "processingTime": 2.5824549999999817,
+          "timestamp": "2025-07-08T20:48:40.618Z"
+        }
+      ]
+    },
+    {
+      "name": "Multiple re-renders (10 toggles)",
+      "averageTime": 1.0919986249999738,
+      "minTime": 0.9349939999999606,
+      "maxTime": 1.3845169999999598,
+      "standardDeviation": 0.14160878608068114,
+      "coefficient": 12.967853881746832,
+      "threshold": 200,
+      "status": "PASS",
+      "category": "reactivity",
+      "description": "Multiple state changes should be efficient",
+      "dataSize": "4.0KB",
+      "details": "Testing reactivity with 4.0KB content through 10 state toggles",
+      "score": 1,
+      "reliability": "LOW",
+      "runs": [
+        {
+          "runNumber": 1,
+          "processingTime": 2.387909000000036,
+          "timestamp": "2025-07-08T20:48:40.634Z"
+        },
+        {
+          "runNumber": 2,
+          "processingTime": 1.115532999999914,
+          "timestamp": "2025-07-08T20:48:40.648Z"
+        },
+        {
+          "runNumber": 3,
+          "processingTime": 1.212936000000127,
+          "timestamp": "2025-07-08T20:48:40.663Z"
+        },
+        {
+          "runNumber": 4,
+          "processingTime": 1.3845169999999598,
+          "timestamp": "2025-07-08T20:48:40.677Z"
+        },
+        {
+          "runNumber": 5,
+          "processingTime": 0.9431089999998221,
+          "timestamp": "2025-07-08T20:48:40.691Z"
+        },
+        {
+          "runNumber": 6,
+          "processingTime": 0.8890980000001036,
+          "timestamp": "2025-07-08T20:48:40.704Z"
+        },
+        {
+          "runNumber": 7,
+          "processingTime": 0.9818319999999403,
+          "timestamp": "2025-07-08T20:48:40.718Z"
+        },
+        {
+          "runNumber": 8,
+          "processingTime": 1.0656690000000708,
+          "timestamp": "2025-07-08T20:48:40.732Z"
+        },
+        {
+          "runNumber": 9,
+          "processingTime": 1.0973989999999958,
+          "timestamp": "2025-07-08T20:48:40.745Z"
+        },
+        {
+          "runNumber": 10,
+          "processingTime": 0.9349939999999606,
+          "timestamp": "2025-07-08T20:48:40.758Z"
+        }
+      ]
+    },
+    {
+      "name": "Computed properties reactivity",
+      "averageTime": 2.110024750000008,
+      "minTime": 1.8502819999998792,
+      "maxTime": 2.3136500000000524,
+      "standardDeviation": 0.14840291778194512,
+      "coefficient": 7.03323114015343,
+      "threshold": 100,
+      "status": "PASS",
+      "category": "reactivity",
+      "description": "Reactive property updates should be fast",
+      "dataSize": "6.1KB",
+      "details": "Testing reactive updates with 6.1KB content across 3 property changes",
+      "score": 2,
+      "reliability": "LOW",
+      "runs": [
+        {
+          "runNumber": 1,
+          "processingTime": 2.3136500000000524,
+          "timestamp": "2025-07-08T20:48:40.774Z"
+        },
+        {
+          "runNumber": 2,
+          "processingTime": 2.044736000000057,
+          "timestamp": "2025-07-08T20:48:40.790Z"
+        },
+        {
+          "runNumber": 3,
+          "processingTime": 2.0560169999998834,
+          "timestamp": "2025-07-08T20:48:40.805Z"
+        },
+        {
+          "runNumber": 4,
+          "processingTime": 2.0969740000000456,
+          "timestamp": "2025-07-08T20:48:40.821Z"
+        },
+        {
+          "runNumber": 5,
+          "processingTime": 2.308770999999979,
+          "timestamp": "2025-07-08T20:48:40.836Z"
+        },
+        {
+          "runNumber": 6,
+          "processingTime": 2.2057680000000346,
+          "timestamp": "2025-07-08T20:48:40.852Z"
+        },
+        {
+          "runNumber": 7,
+          "processingTime": 3.3343560000000707,
+          "timestamp": "2025-07-08T20:48:40.867Z"
+        },
+        {
+          "runNumber": 8,
+          "processingTime": 1.7601320000001124,
+          "timestamp": "2025-07-08T20:48:40.882Z"
+        },
+        {
+          "runNumber": 9,
+          "processingTime": 1.8502819999998792,
+          "timestamp": "2025-07-08T20:48:40.897Z"
+        },
+        {
+          "runNumber": 10,
+          "processingTime": 2.004000000000133,
+          "timestamp": "2025-07-08T20:48:40.912Z"
+        }
+      ]
+    },
+    {
+      "name": "HTML sanitization overhead",
+      "averageTime": 1.7456686250000075,
+      "minTime": 1.5300709999999071,
+      "maxTime": 2.1746989999999187,
+      "standardDeviation": 0.24267164242291703,
+      "coefficient": 13.901357849226164,
+      "threshold": 150,
+      "status": "PASS",
+      "category": "sanitization",
+      "description": "HTML sanitization should not significantly impact performance",
+      "dataSize": "2.3KB",
+      "details": "Sanitizing 2.3KB of malicious HTML with 80 dangerous elements",
+      "score": 1,
+      "reliability": "LOW",
+      "runs": [
+        {
+          "runNumber": 1,
+          "processingTime": 2.3649370000000545,
+          "timestamp": "2025-07-08T20:48:40.927Z"
+        },
+        {
+          "runNumber": 2,
+          "processingTime": 2.1746989999999187,
+          "timestamp": "2025-07-08T20:48:40.939Z"
+        },
+        {
+          "runNumber": 3,
+          "processingTime": 1.9567409999999654,
+          "timestamp": "2025-07-08T20:48:40.951Z"
+        },
+        {
+          "runNumber": 4,
+          "processingTime": 1.3013809999999921,
+          "timestamp": "2025-07-08T20:48:40.963Z"
+        },
+        {
+          "runNumber": 5,
+          "processingTime": 1.6158920000000307,
+          "timestamp": "2025-07-08T20:48:40.974Z"
+        },
+        {
+          "runNumber": 6,
+          "processingTime": 1.5340679999999338,
+          "timestamp": "2025-07-08T20:48:40.986Z"
+        },
+        {
+          "runNumber": 7,
+          "processingTime": 1.5524720000000798,
+          "timestamp": "2025-07-08T20:48:40.998Z"
+        },
+        {
+          "runNumber": 8,
+          "processingTime": 1.5300709999999071,
+          "timestamp": "2025-07-08T20:48:41.009Z"
+        },
+        {
+          "runNumber": 9,
+          "processingTime": 2.014029000000164,
+          "timestamp": "2025-07-08T20:48:41.022Z"
+        },
+        {
+          "runNumber": 10,
+          "processingTime": 1.5873770000000604,
+          "timestamp": "2025-07-08T20:48:41.034Z"
+        }
+      ]
+    },
+    {
+      "name": "Memory usage (20 components)",
+      "averageTime": 24.07106724999997,
+      "minTime": 22.691679000000022,
+      "maxTime": 25.22759700000006,
+      "standardDeviation": 0.9579073363223388,
+      "coefficient": 3.9794967392745746,
+      "threshold": 500,
+      "status": "PASS",
+      "category": "memory",
+      "description": "Creating multiple components should not cause memory issues",
+      "dataSize": "4.0KB × 20",
+      "details": "Created 20 components with 4.0KB each",
+      "score": 5,
+      "reliability": "LOW",
+      "runs": [
+        {
+          "runNumber": 1,
+          "processingTime": 27.479802000000063,
+          "timestamp": "2025-07-08T20:48:41.074Z"
+        },
+        {
+          "runNumber": 2,
+          "processingTime": 22.991771999999855,
+          "timestamp": "2025-07-08T20:48:41.110Z"
+        },
+        {
+          "runNumber": 3,
+          "processingTime": 25.09305399999994,
+          "timestamp": "2025-07-08T20:48:41.147Z"
+        },
+        {
+          "runNumber": 4,
+          "processingTime": 24.362194000000045,
+          "timestamp": "2025-07-08T20:48:41.184Z"
+        },
+        {
+          "runNumber": 5,
+          "processingTime": 23.80657199999996,
+          "timestamp": "2025-07-08T20:48:41.220Z"
+        },
+        {
+          "runNumber": 6,
+          "processingTime": 21.68660399999999,
+          "timestamp": "2025-07-08T20:48:41.256Z"
+        },
+        {
+          "runNumber": 7,
+          "processingTime": 25.22759700000006,
+          "timestamp": "2025-07-08T20:48:41.295Z"
+        },
+        {
+          "runNumber": 8,
+          "processingTime": 23.27473400000008,
+          "timestamp": "2025-07-08T20:48:41.330Z"
+        },
+        {
+          "runNumber": 9,
+          "processingTime": 25.1209359999998,
+          "timestamp": "2025-07-08T20:48:41.367Z"
+        },
+        {
+          "runNumber": 10,
+          "processingTime": 22.691679000000022,
+          "timestamp": "2025-07-08T20:48:41.402Z"
+        }
+      ]
+    },
+    {
+      "name": "Edge case: extremely long word",
+      "averageTime": 1.4003232499999854,
+      "minTime": 1.0805270000000746,
+      "maxTime": 1.5387369999998555,
+      "standardDeviation": 0.15044341115576168,
+      "coefficient": 10.743477347516956,
+      "threshold": 50,
+      "status": "PASS",
+      "category": "edge-case",
+      "description": "Extremely long words should be handled efficiently",
+      "dataSize": "9.8KB",
+      "details": "Processing 9.8KB single word (10000 characters)",
+      "score": 3,
+      "reliability": "LOW",
+      "runs": [
+        {
+          "runNumber": 1,
+          "processingTime": 1.0805270000000746,
+          "timestamp": "2025-07-08T20:48:41.414Z"
+        },
+        {
+          "runNumber": 2,
+          "processingTime": 1.247569999999996,
+          "timestamp": "2025-07-08T20:48:41.426Z"
+        },
+        {
+          "runNumber": 3,
+          "processingTime": 1.504873000000316,
+          "timestamp": "2025-07-08T20:48:41.438Z"
+        },
+        {
+          "runNumber": 4,
+          "processingTime": 1.4300829999997404,
+          "timestamp": "2025-07-08T20:48:41.449Z"
+        },
+        {
+          "runNumber": 5,
+          "processingTime": 1.3806899999999587,
+          "timestamp": "2025-07-08T20:48:41.461Z"
+        },
+        {
+          "runNumber": 6,
+          "processingTime": 1.5133089999999356,
+          "timestamp": "2025-07-08T20:48:41.473Z"
+        },
+        {
+          "runNumber": 7,
+          "processingTime": 1.5387369999998555,
+          "timestamp": "2025-07-08T20:48:41.484Z"
+        },
+        {
+          "runNumber": 8,
+          "processingTime": 0.9241539999998167,
+          "timestamp": "2025-07-08T20:48:41.496Z"
+        },
+        {
+          "runNumber": 9,
+          "processingTime": 1.7089460000001964,
+          "timestamp": "2025-07-08T20:48:41.507Z"
+        },
+        {
+          "runNumber": 10,
+          "processingTime": 1.506797000000006,
+          "timestamp": "2025-07-08T20:48:41.519Z"
+        }
+      ]
+    },
+    {
+      "name": "Concurrent component creation",
+      "averageTime": 11.178265624999938,
+      "minTime": 9.549925999999687,
+      "maxTime": 12.967005999999856,
+      "standardDeviation": 1.3989180360273394,
+      "coefficient": 12.514625103367475,
+      "threshold": 500,
+      "status": "PASS",
+      "category": "processing",
+      "description": "Concurrent component creation should be efficient",
+      "dataSize": "2.4KB × 10",
+      "details": "Creating 10 components simultaneously with 2.4KB each",
+      "score": 2,
+      "reliability": "LOW",
+      "runs": [
+        {
+          "runNumber": 1,
+          "processingTime": 9.549925999999687,
+          "timestamp": "2025-07-08T20:48:41.540Z"
+        },
+        {
+          "runNumber": 2,
+          "processingTime": 12.423956999999973,
+          "timestamp": "2025-07-08T20:48:41.563Z"
+        },
+        {
+          "runNumber": 3,
+          "processingTime": 9.57165699999996,
+          "timestamp": "2025-07-08T20:48:41.583Z"
+        },
+        {
+          "runNumber": 4,
+          "processingTime": 12.2324279999998,
+          "timestamp": "2025-07-08T20:48:41.605Z"
+        },
+        {
+          "runNumber": 5,
+          "processingTime": 9.35975899999994,
+          "timestamp": "2025-07-08T20:48:41.625Z"
+        },
+        {
+          "runNumber": 6,
+          "processingTime": 12.590299999999843,
+          "timestamp": "2025-07-08T20:48:41.648Z"
+        },
+        {
+          "runNumber": 7,
+          "processingTime": 10.04515500000025,
+          "timestamp": "2025-07-08T20:48:41.668Z"
+        },
+        {
+          "runNumber": 8,
+          "processingTime": 13.10787100000016,
+          "timestamp": "2025-07-08T20:48:41.692Z"
+        },
+        {
+          "runNumber": 9,
+          "processingTime": 10.045696000000135,
+          "timestamp": "2025-07-08T20:48:41.712Z"
+        },
+        {
+          "runNumber": 10,
+          "processingTime": 12.967005999999856,
+          "timestamp": "2025-07-08T20:48:41.735Z"
+        }
+      ]
+    },
+    {
+      "name": "Complex HTML structure",
+      "averageTime": 3.4197565000000054,
+      "minTime": 2.7823699999999008,
+      "maxTime": 4.34393,
+      "standardDeviation": 0.53729612823988,
+      "coefficient": 15.711531749113691,
+      "threshold": 200,
+      "status": "PASS",
+      "category": "processing",
+      "description": "Complex nested HTML should be processed efficiently",
+      "dataSize": "12.8KB",
+      "details": "Processing 12.8KB complex nested HTML with 360 tags",
+      "score": 2,
+      "reliability": "LOW",
+      "runs": [
+        {
+          "runNumber": 1,
+          "processingTime": 5.8747809999999845,
+          "timestamp": "2025-07-08T20:48:41.753Z"
+        },
+        {
+          "runNumber": 2,
+          "processingTime": 3.1711190000000897,
+          "timestamp": "2025-07-08T20:48:41.766Z"
+        },
+        {
+          "runNumber": 3,
+          "processingTime": 3.9370550000003277,
+          "timestamp": "2025-07-08T20:48:41.781Z"
+        },
+        {
+          "runNumber": 4,
+          "processingTime": 4.34393,
+          "timestamp": "2025-07-08T20:48:41.795Z"
+        },
+        {
+          "runNumber": 5,
+          "processingTime": 2.6671239999996033,
+          "timestamp": "2025-07-08T20:48:41.809Z"
+        },
+        {
+          "runNumber": 6,
+          "processingTime": 2.959711999999854,
+          "timestamp": "2025-07-08T20:48:41.822Z"
+        },
+        {
+          "runNumber": 7,
+          "processingTime": 2.928824000000077,
+          "timestamp": "2025-07-08T20:48:41.836Z"
+        },
+        {
+          "runNumber": 8,
+          "processingTime": 2.7823699999999008,
+          "timestamp": "2025-07-08T20:48:41.849Z"
+        },
+        {
+          "runNumber": 9,
+          "processingTime": 3.3102399999997942,
+          "timestamp": "2025-07-08T20:48:41.862Z"
+        },
+        {
+          "runNumber": 10,
+          "processingTime": 3.9248019999999997,
+          "timestamp": "2025-07-08T20:48:41.876Z"
+        }
+      ]
+    }
+  ]
+}
