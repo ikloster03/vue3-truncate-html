@@ -16,3 +16,6 @@ docs/.vitepress/cache
 
 test-vue-project
 vue3-truncate-html-1.0.0.tgz
+
+performance-multi-report.html
+performance-delta.html

@@ -142,6 +142,12 @@ pnpm install
 # Запуск тестов
 pnpm test
 
+# Запуск тестов производительности
+pnpm run test:performance
+
+# Тесты с покрытием кода
+pnpm run test:coverage
+
 # Линтинг
 pnpm lint
 
@@ -151,6 +157,16 @@ pnpm typecheck
 # Сборка библиотеки
 pnpm build:library
 ```
+
+### Тестирование производительности
+
+Проект включает систему тестирования производительности для мониторинга скорости работы компонента:
+
+- `pnpm run test:performance` - запуск тестов производительности
+- `pnpm run test:performance:quiet` - тихий режим
+- `pnpm run test:performance:report` - детальный отчет
+
+Подробная документация: [docs/performance-testing.md](./docs/performance-testing.md)
 
 ## Лицензия
 

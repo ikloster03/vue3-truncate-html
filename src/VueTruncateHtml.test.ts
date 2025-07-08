@@ -426,3 +426,157 @@ test('custom sanitize options', async () => {
   expect(content.find('p').exists()).toBe(true);
   expect(content.find('b').exists()).toBe(false); // b tag should be removed by sanitize options
 });
+
+test('XSS protection: script tags are sanitized', async () => {
+  const maliciousHtml = '<p>Hello <script>alert("XSS")</script> World</p>';
+  const wrapper = mount({
+    data() {
+      return { isTruncated: false, text: maliciousHtml };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="html"></vue-truncate-html>',
+    components: { 'vue-truncate-html': VueTruncateHtml },
+  });
+
+  const content = wrapper.find('.vue-truncate-html__content_html');
+
+  expect(content.exists()).toBe(true);
+  expect(content.element.innerHTML).not.toContain('<script>');
+  expect(content.element.innerHTML).not.toContain('alert(');
+  expect(content.text()).toContain('Hello  World');
+});
+
+test('XSS protection: javascript: protocol is blocked', async () => {
+  // eslint-disable-next-line no-script-url
+  const maliciousHtml = '<a href="javascript:alert(\'XSS\')">Click me</a>';
+  const wrapper = mount({
+    data() {
+      return { isTruncated: false, text: maliciousHtml };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="html"></vue-truncate-html>',
+    components: { 'vue-truncate-html': VueTruncateHtml },
+  });
+
+  const content = wrapper.find('.vue-truncate-html__content_html');
+
+  expect(content.exists()).toBe(true);
+  // eslint-disable-next-line no-script-url
+  expect(content.element.innerHTML).not.toContain('javascript:');
+  // Ссылка может остаться, но без href атрибута или с очищенным href
+  const link = content.find('a');
+
+  if (link.exists()) {
+    expect(link.attributes('href')).toBeFalsy();
+  }
+});
+
+test('XSS protection: onclick handlers are removed', async () => {
+  const maliciousHtml = '<div onclick="doSomething()">Click me</div>';
+  const wrapper = mount({
+    data() {
+      return { isTruncated: false, text: maliciousHtml };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="html"></vue-truncate-html>',
+    components: { 'vue-truncate-html': VueTruncateHtml },
+  });
+
+  const content = wrapper.find('.vue-truncate-html__content_html');
+
+  expect(content.exists()).toBe(true);
+  expect(content.element.innerHTML).not.toContain('onclick');
+  expect(content.element.innerHTML).not.toContain('doSomething');
+});
+
+test('XSS protection: text type is also sanitized', async () => {
+  const maliciousText = '<script>alert("XSS")</script>Hello World';
+  const wrapper = mount({
+    data() {
+      return { isTruncated: false, text: maliciousText };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" type="text"></vue-truncate-html>',
+    components: { 'vue-truncate-html': VueTruncateHtml },
+  });
+
+  const content = wrapper.find('.vue-truncate-html__content_text');
+
+  expect(content.exists()).toBe(true);
+  expect(content.text()).not.toContain('<script>');
+  expect(content.text()).toContain('Hello World');
+});
+
+test('input validation: rejects javascript: protocol', async () => {
+  // eslint-disable-next-line no-script-url
+  const maliciousText = 'javascript:alert("XSS")';
+
+  // Создаем компонент с валидацией
+  const TestComponent = {
+    data() {
+      return { isTruncated: false, text: maliciousText };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text"></vue-truncate-html>',
+    components: { 'vue-truncate-html': VueTruncateHtml },
+  };
+
+  // Ожидаем, что Vue выбросит предупреждение о неправильном prop
+  const consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+  mount(TestComponent);
+
+  // Проверяем, что было предупреждение о валидации
+  expect(consoleSpy).toHaveBeenCalled();
+
+  consoleSpy.mockRestore();
+});
+
+test('input validation: rejects onclick handlers', async () => {
+  const maliciousText = '<div onclick="alert()">test</div>';
+
+  const TestComponent = {
+    data() {
+      return { isTruncated: false, text: maliciousText };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text"></vue-truncate-html>',
+    components: { 'vue-truncate-html': VueTruncateHtml },
+  };
+
+  const consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+  mount(TestComponent);
+
+  expect(consoleSpy).toHaveBeenCalled();
+
+  consoleSpy.mockRestore();
+});
+
+test('length validation: rejects negative values', async () => {
+  const consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+  mount({
+    data() {
+      return { isTruncated: false, text: 'Hello World' };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" :length="-1"></vue-truncate-html>',
+    components: { 'vue-truncate-html': VueTruncateHtml },
+  });
+
+  // Ожидаем предупреждение о неправильном prop
+  expect(consoleSpy).toHaveBeenCalled();
+
+  consoleSpy.mockRestore();
+});
+
+test('length validation: rejects extremely large values', async () => {
+  const consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+  mount({
+    data() {
+      return { isTruncated: false, text: 'Hello World' };
+    },
+    template: '<vue-truncate-html v-model="isTruncated" :text="text" :length="99999"></vue-truncate-html>',
+    components: { 'vue-truncate-html': VueTruncateHtml },
+  });
+
+  // Ожидаем предупреждение о неправильном prop
+  expect(consoleSpy).toHaveBeenCalled();
+
+  consoleSpy.mockRestore();
+});

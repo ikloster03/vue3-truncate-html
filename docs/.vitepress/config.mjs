@@ -39,6 +39,10 @@ export default defineConfig({
             text: 'Тестирование',
             link: '/testing',
           },
+          {
+            text: 'Тестирование производительности',
+            link: '/performance-testing',
+          },
         ]
       }
     },
@@ -74,6 +78,10 @@ export default defineConfig({
           {
             text: 'Testing',
             link: '/en/testing',
+          },
+          {
+            text: 'Performance Testing',
+            link: '/en/performance-testing',
           },
         ]
       }

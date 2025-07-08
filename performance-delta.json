@@ -1,0 +1,112 @@
+{
+  "summary": {
+    "previousScore": 97,
+    "currentScore": 98,
+    "scoreDelta": 1,
+    "previousDuration": 5.834136472222216,
+    "currentDuration": 4.1021524305555594,
+    "durationDelta": -1.7319840416666565,
+    "timestamp": "2025-07-08T22:51:37.552Z"
+  },
+  "testDeltas": [
+    {
+      "testName": "Large HTML content processing",
+      "category": "processing",
+      "previousTime": 5.138800124999989,
+      "currentTime": 3.397360374999991,
+      "timeDelta": -1.7414397499999978,
+      "previousPercentage": 5,
+      "currentPercentage": 3,
+      "percentageDelta": -2,
+      "status": "IMPROVED"
+    },
+    {
+      "testName": "Large text content processing",
+      "category": "processing",
+      "previousTime": 2.3513235000000634,
+      "currentTime": 1.7476813749999849,
+      "timeDelta": -0.6036421250000785,
+      "previousPercentage": 5,
+      "currentPercentage": 3,
+      "percentageDelta": -2,
+      "status": "SAME"
+    },
+    {
+      "testName": "Multiple re-renders (10 toggles)",
+      "category": "reactivity",
+      "previousTime": 1.0919986249999738,
+      "currentTime": 1.0739136249999603,
+      "timeDelta": -0.01808500000001345,
+      "previousPercentage": 1,
+      "currentPercentage": 1,
+      "percentageDelta": 0,
+      "status": "SAME"
+    },
+    {
+      "testName": "Computed properties reactivity",
+      "category": "reactivity",
+      "previousTime": 2.110024750000008,
+      "currentTime": 1.2774606250000033,
+      "timeDelta": -0.8325641250000047,
+      "previousPercentage": 2,
+      "currentPercentage": 1,
+      "percentageDelta": -1,
+      "status": "SAME"
+    },
+    {
+      "testName": "HTML sanitization overhead",
+      "category": "sanitization",
+      "previousTime": 1.7456686250000075,
+      "currentTime": 1.6280719999999462,
+      "timeDelta": -0.1175966250000613,
+      "previousPercentage": 1,
+      "currentPercentage": 1,
+      "percentageDelta": 0,
+      "status": "SAME"
+    },
+    {
+      "testName": "Memory usage (20 components)",
+      "category": "memory",
+      "previousTime": 24.07106724999997,
+      "currentTime": 16.05646637500007,
+      "timeDelta": -8.0146008749999,
+      "previousPercentage": 5,
+      "currentPercentage": 3,
+      "percentageDelta": -2,
+      "status": "IMPROVED"
+    },
+    {
+      "testName": "Edge case: extremely long word",
+      "category": "edge-case",
+      "previousTime": 1.4003232499999854,
+      "currentTime": 1.3340893749999907,
+      "timeDelta": -0.06623387499999467,
+      "previousPercentage": 3,
+      "currentPercentage": 3,
+      "percentageDelta": 0,
+      "status": "SAME"
+    },
+    {
+      "testName": "Concurrent component creation",
+      "category": "processing",
+      "previousTime": 11.178265624999938,
+      "currentTime": 8.235486625000107,
+      "timeDelta": -2.942778999999831,
+      "previousPercentage": 2,
+      "currentPercentage": 2,
+      "percentageDelta": 0,
+      "status": "IMPROVED"
+    },
+    {
+      "testName": "Complex HTML structure",
+      "category": "processing",
+      "previousTime": 3.4197565000000054,
+      "currentTime": 2.168841499999985,
+      "timeDelta": -1.2509150000000204,
+      "previousPercentage": 2,
+      "currentPercentage": 1,
+      "percentageDelta": -1,
+      "status": "IMPROVED"
+    }
+  ]
+}

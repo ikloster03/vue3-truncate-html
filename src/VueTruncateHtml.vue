@@ -2,31 +2,40 @@
 <template>
   <div :class="proxyClasses.container">
     <div
-      v-if="isHTML"
+      v-if="processedContent.isHTML"
       :class="[proxyClasses.content, proxyClasses.contentHtml]"
-      v-html="proxyText" />
+      v-html="processedContent.displayText" />
     <div
       v-else
       :class="[proxyClasses.content, proxyClasses.contentText]">
-      {{ proxyText }}
+      {{ processedContent.displayText }}
     </div>
     <slot>
       <button
-        v-if="showButton"
-        :class="[proxyClasses.button, proxyButtonClass]"
+        v-if="processedContent.showButton"
+        :class="[proxyClasses.button, processedContent.buttonClass]"
         @click.prevent="toggle">
-        {{ buttonTitle }}
+        {{ processedContent.buttonTitle }}
       </button>
     </slot>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue';
+import {
+  computed,
+  defineComponent,
+  PropType,
+} from 'vue';
 import htmlTruncate from 'html-truncate';
-import sanitizeHtml, { IOptions } from 'sanitize-html';
-import { Classes, Buttons, Type } from './types';
-import { defaultClasses, defaultButtons, HTML } from './const';
+import { IOptions } from 'sanitize-html';
+import {
+  Classes, Buttons, Type, ProcessedContent,
+} from './types';
+import {
+  defaultClasses, defaultButtons, HTML, DEFAULT_SANITIZE_OPTIONS,
+} from './const';
+import { sanitizeWithCache, stripHtmlTags } from './utils';
 
 export default defineComponent({
   name: 'VueTruncateHtml',
@@ -38,10 +47,22 @@ export default defineComponent({
     text: {
       type: String,
       default: '',
+      validator: (value: string) => {
+        if (typeof value !== 'string') return false;
+        const suspiciousPatterns = [
+          /javascript:/i,
+          /vbscript:/i,
+          /data:text\/html/i,
+          /on\w+\s*=/i,
+        ];
+
+        return !suspiciousPatterns.some((pattern) => pattern.test(value));
+      },
     },
     length: {
       type: Number,
       default: 100,
+      validator: (value: number) => value > 0 && value <= 10000,
     },
     hideButton: {
       type: Boolean,
@@ -61,7 +82,7 @@ export default defineComponent({
     },
     sanitizeOptions: {
       type: Object as PropType<IOptions>,
-      default: undefined,
+      default: () => DEFAULT_SANITIZE_OPTIONS,
     },
   },
   emits: ['update:modelValue'],
@@ -71,55 +92,66 @@ export default defineComponent({
       set: (value) => emit('update:modelValue', value),
     });
 
-    const isHTML = computed(() => props.type === HTML);
+    // Объединенное computed property для всей обработки контента
+    const processedContent = computed((): ProcessedContent => {
+      const isHTML = props.type === HTML;
 
-    const textLength = computed(() => {
-      const text = isHTML.value ? props.text.replace(/<[^>]*>/g, '') : props.text;
+      // Санитизация (единоразовая)
+      const sanitizedText = sanitizeWithCache(props.text, props.sanitizeOptions, isHTML);
 
-      return text.length;
+      // Определение длины текста
+      const textLength = isHTML ? stripHtmlTags(sanitizedText).length : sanitizedText.length;
+
+      // Показывать ли кнопку
+      const showButton = !props.hideButton && textLength > props.length;
+
+      // Обрезка контента
+      let displayText: string;
+
+      if (isTruncated.value) {
+        if (isHTML) {
+          displayText = htmlTruncate(sanitizedText, props.length);
+        } else {
+          displayText = sanitizedText.substring(0, props.length);
+        }
+      } else {
+        displayText = sanitizedText;
+      }
+
+      // Заголовок кнопки
+      const buttonTitle = isTruncated.value
+        ? props.buttons.more ?? defaultButtons.more
+        : props.buttons.less ?? defaultButtons.less;
+
+      // Класс кнопки
+      const buttonClass = isTruncated.value
+        ? props.classes.buttonMore ?? defaultClasses.buttonMore
+        : props.classes.buttonLess ?? defaultClasses.buttonLess;
+
+      return {
+        isHTML,
+        displayText,
+        showButton,
+        buttonTitle,
+        buttonClass,
+      };
     });
 
-    const showButton = computed(() => !props.hideButton && textLength.value > props.length);
-
-    const sanitizedHtmlOrText = computed(() => (isHTML.value
-      ? sanitizeHtml(props.text, props.sanitizeOptions)
-      : props.text));
-    const truncatedHtmlOrText = computed(() => (
-      isHTML.value
-        ? htmlTruncate(sanitizedHtmlOrText.value, props.length)
-        : sanitizedHtmlOrText.value.substring(0, props.length)
-    ));
-
-    const proxyText = computed(() => (isTruncated.value ? truncatedHtmlOrText.value : sanitizedHtmlOrText.value));
-
-    const buttonTitle = computed(() => (
-      isTruncated.value
-        ? props.buttons.more ?? defaultButtons.more
-        : props.buttons.less ?? defaultButtons.less
-    ));
-
+    // Объединенное computed property для классов
     const proxyClasses = computed(() => ({
-      container: props.classes?.container ?? defaultClasses.container,
-      content: props.classes?.content ?? defaultClasses.content,
-      contentHtml: props.classes?.contentHtml ?? defaultClasses.contentHtml,
-      contentText: props.classes?.contentText ?? defaultClasses.contentText,
-      button: props.classes?.button ?? defaultClasses.button,
-      buttonMore: props.classes?.buttonMore ?? defaultClasses.buttonMore,
-      buttonLess: props.classes?.buttonLess ?? defaultClasses.buttonLess,
+      container: props.classes.container ?? defaultClasses.container,
+      content: props.classes.content ?? defaultClasses.content,
+      contentHtml: props.classes.contentHtml ?? defaultClasses.contentHtml,
+      contentText: props.classes.contentText ?? defaultClasses.contentText,
+      button: props.classes.button ?? defaultClasses.button,
     }));
-
-    const proxyButtonClass = computed(() => (isTruncated.value ? proxyClasses.value.buttonMore : proxyClasses.value.buttonLess));
 
     const toggle = () => {
       isTruncated.value = !isTruncated.value;
     };
 
     return {
-      isHTML,
-      showButton,
-      proxyButtonClass,
-      proxyText,
-      buttonTitle,
+      processedContent,
       proxyClasses,
       toggle,
     };
