@@ -142,6 +142,12 @@ pnpm install
 # Run tests
 pnpm test
 
+# Run performance tests
+pnpm run test:performance
+
+# Tests with coverage
+pnpm run test:coverage
+
 # Lint
 pnpm lint
 
@@ -151,6 +157,16 @@ pnpm typecheck
 # Build library
 pnpm build:library
 ```
+
+### Performance Testing
+
+The project includes a performance testing system for monitoring component speed:
+
+- `pnpm run test:performance` - run performance tests
+- `pnpm run test:performance:quiet` - quiet mode
+- `pnpm run test:performance:report` - detailed report
+
+Detailed documentation: [docs/en/performance-testing.md](./docs/en/performance-testing.md)
 
 ## License
 
