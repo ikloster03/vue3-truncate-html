@@ -2,31 +2,39 @@
 <template>
   <div :class="proxyClasses.container">
     <div
-      v-if="isHTML"
+      v-if="processedContent.isHTML"
       :class="[proxyClasses.content, proxyClasses.contentHtml]"
-      v-html="sanitizedProxyText" />
+      v-html="processedContent.displayText" />
     <div
       v-else
       :class="[proxyClasses.content, proxyClasses.contentText]">
-      {{ proxyText }}
+      {{ processedContent.displayText }}
     </div>
     <slot>
       <button
-        v-if="showButton"
-        :class="[proxyClasses.button, proxyButtonClass]"
+        v-if="processedContent.showButton"
+        :class="[proxyClasses.button, processedContent.buttonClass]"
         @click.prevent="toggle">
-        {{ buttonTitle }}
+        {{ processedContent.buttonTitle }}
       </button>
     </slot>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue';
+import {
+  computed,
+  defineComponent,
+  PropType,
+} from 'vue';
 import htmlTruncate from 'html-truncate';
 import sanitizeHtml, { IOptions } from 'sanitize-html';
 import { Classes, Buttons, Type } from './types';
 import { defaultClasses, defaultButtons, HTML } from './const';
+
+// Кеш для санитизации
+const sanitizeCache = new Map<string, string>();
+const MAX_CACHE_SIZE = 100;
 
 // Безопасные настройки санитизации по умолчанию
 const DEFAULT_SANITIZE_OPTIONS: IOptions = {
@@ -50,6 +58,58 @@ const DEFAULT_SANITIZE_OPTIONS: IOptions = {
   enforceHtmlBoundary: true,
 };
 
+// Оптимизированная функция санитизации с кешированием
+function sanitizeWithCache(text: string, options: IOptions, isHTML: boolean): string {
+  const cacheKey = `${text}_${JSON.stringify(options)}_${isHTML}`;
+
+  if (sanitizeCache.has(cacheKey)) {
+    return sanitizeCache.get(cacheKey)!;
+  }
+
+  // Очистка кеша при превышении лимита
+  if (sanitizeCache.size >= MAX_CACHE_SIZE) {
+    const firstKey = sanitizeCache.keys().next().value;
+
+    if (firstKey) {
+      sanitizeCache.delete(firstKey);
+    }
+  }
+
+  let result: string;
+
+  try {
+    if (isHTML) {
+      result = sanitizeHtml(text, options);
+    } else {
+      // Для текста применяем базовую санитизацию
+      result = sanitizeHtml(text, {
+        allowedTags: [],
+        allowedAttributes: {},
+        disallowedTagsMode: 'escape',
+      });
+    }
+  } catch {
+    result = '';
+  }
+
+  sanitizeCache.set(cacheKey, result);
+
+  return result;
+}
+
+// Оптимизированная функция удаления HTML тегов
+function stripHtmlTags(text: string): string {
+  return text.replace(/<[^>]*>/g, '').trim();
+}
+
+interface ProcessedContent {
+  isHTML: boolean;
+  displayText: string;
+  showButton: boolean;
+  buttonTitle: string;
+  buttonClass: string;
+}
+
 export default defineComponent({
   name: 'VueTruncateHtml',
   props: {
@@ -61,14 +121,12 @@ export default defineComponent({
       type: String,
       default: '',
       validator: (value: string) => {
-        // Базовая валидация на очень подозрительный контент
         if (typeof value !== 'string') return false;
-        // Проверка на подозрительные скрипты
         const suspiciousPatterns = [
           /javascript:/i,
           /vbscript:/i,
           /data:text\/html/i,
-          /on\w+\s*=/i, // onclick, onload, etc.
+          /on\w+\s*=/i,
         ];
 
         return !suspiciousPatterns.some((pattern) => pattern.test(value));
@@ -77,7 +135,7 @@ export default defineComponent({
     length: {
       type: Number,
       default: 100,
-      validator: (value: number) => value > 0 && value <= 10000, // Ограничение на разумную длину
+      validator: (value: number) => value > 0 && value <= 10000,
     },
     hideButton: {
       type: Boolean,
@@ -107,71 +165,52 @@ export default defineComponent({
       set: (value) => emit('update:modelValue', value),
     });
 
-    const isHTML = computed(() => props.type === HTML);
+    // Объединенное computed property для всей обработки контента
+    const processedContent = computed((): ProcessedContent => {
+      const isHTML = props.type === HTML;
 
-    // Кешируем результат удаления HTML тегов для производительности
-    const plainText = computed(() => {
-      if (!isHTML.value) return props.text;
+      // Санитизация (единоразовая)
+      const sanitizedText = sanitizeWithCache(props.text, props.sanitizeOptions, isHTML);
 
-      try {
-        // Более эффективное удаление HTML тегов с кешированием
-        return props.text.replace(/<[^>]*>/g, '').trim();
-      } catch {
-        return '';
-      }
-    });
+      // Определение длины текста
+      const textLength = isHTML ? stripHtmlTags(sanitizedText).length : sanitizedText.length;
 
-    const textLength = computed(() => plainText.value.length);
+      // Показывать ли кнопку
+      const showButton = !props.hideButton && textLength > props.length;
 
-    const showButton = computed(() => !props.hideButton && textLength.value > props.length);
+      // Обрезка контента
+      let displayText: string;
 
-    // Всегда санитизируем контент, даже для текста (на случай если type изменится)
-    const sanitizedText = computed(() => {
-      try {
-        if (isHTML.value) {
-          return sanitizeHtml(props.text, props.sanitizeOptions);
+      if (isTruncated.value) {
+        if (isHTML) {
+          displayText = htmlTruncate(sanitizedText, props.length);
+        } else {
+          displayText = sanitizedText.substring(0, props.length);
         }
-
-        // Для текста применяем базовую санитизацию для защиты от XSS
-        return sanitizeHtml(props.text, {
-          allowedTags: [],
-          allowedAttributes: {},
-          disallowedTagsMode: 'escape',
-        });
-      } catch {
-        return '';
+      } else {
+        displayText = sanitizedText;
       }
-    });
 
-    const truncatedContent = computed(() => {
-      try {
-        if (isHTML.value) {
-          return htmlTruncate(sanitizedText.value, props.length);
-        }
-
-        return sanitizedText.value.substring(0, props.length);
-      } catch {
-        return '';
-      }
-    });
-
-    const proxyText = computed(() => (isTruncated.value ? truncatedContent.value : sanitizedText.value));
-
-    // Дополнительная санитизация для v-html (двойная защита)
-    const sanitizedProxyText = computed(() => {
-      try {
-        return sanitizeHtml(proxyText.value, props.sanitizeOptions);
-      } catch {
-        return '';
-      }
-    });
-
-    const buttonTitle = computed(() => (
-      isTruncated.value
+      // Заголовок кнопки
+      const buttonTitle = isTruncated.value
         ? props.buttons.more ?? defaultButtons.more
-        : props.buttons.less ?? defaultButtons.less
-    ));
+        : props.buttons.less ?? defaultButtons.less;
 
+      // Класс кнопки
+      const buttonClass = isTruncated.value
+        ? props.classes?.buttonMore ?? defaultClasses.buttonMore
+        : props.classes?.buttonLess ?? defaultClasses.buttonLess;
+
+      return {
+        isHTML,
+        displayText,
+        showButton,
+        buttonTitle,
+        buttonClass,
+      };
+    });
+
+    // Объединенные классы
     const proxyClasses = computed(() => ({
       container: props.classes?.container ?? defaultClasses.container,
       content: props.classes?.content ?? defaultClasses.content,
@@ -182,19 +221,12 @@ export default defineComponent({
       buttonLess: props.classes?.buttonLess ?? defaultClasses.buttonLess,
     }));
 
-    const proxyButtonClass = computed(() => (isTruncated.value ? proxyClasses.value.buttonMore : proxyClasses.value.buttonLess));
-
     const toggle = () => {
       isTruncated.value = !isTruncated.value;
     };
 
     return {
-      isHTML,
-      showButton,
-      proxyButtonClass,
-      proxyText,
-      sanitizedProxyText,
-      buttonTitle,
+      processedContent,
       proxyClasses,
       toggle,
     };
