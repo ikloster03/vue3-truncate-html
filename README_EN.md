@@ -105,6 +105,7 @@ export default {
   margin-bottom: 30px;
 }
 </style>
+```
 
 ## Features
 
