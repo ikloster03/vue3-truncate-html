@@ -4,7 +4,7 @@
     <div
       v-if="isHTML"
       :class="[proxyClasses.content, proxyClasses.contentHtml]"
-      v-html="proxyText" />
+      v-html="sanitizedProxyText" />
     <div
       v-else
       :class="[proxyClasses.content, proxyClasses.contentText]">
@@ -28,6 +28,28 @@ import sanitizeHtml, { IOptions } from 'sanitize-html';
 import { Classes, Buttons, Type } from './types';
 import { defaultClasses, defaultButtons, HTML } from './const';
 
+// Безопасные настройки санитизации по умолчанию
+const DEFAULT_SANITIZE_OPTIONS: IOptions = {
+  allowedTags: [
+    'p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div',
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    'ul', 'ol', 'li',
+    'blockquote', 'pre', 'code',
+    'a',
+  ],
+  allowedAttributes: {
+    a: ['href', 'title', 'target'],
+    '*': ['class', 'style'],
+  },
+  allowedSchemes: ['http', 'https', 'mailto'],
+  allowedSchemesByTag: {
+    a: ['http', 'https', 'mailto'],
+  },
+  allowProtocolRelative: false,
+  disallowedTagsMode: 'discard',
+  enforceHtmlBoundary: true,
+};
+
 export default defineComponent({
   name: 'VueTruncateHtml',
   props: {
@@ -38,10 +60,24 @@ export default defineComponent({
     text: {
       type: String,
       default: '',
+      validator: (value: string) => {
+        // Базовая валидация на очень подозрительный контент
+        if (typeof value !== 'string') return false;
+        // Проверка на подозрительные скрипты
+        const suspiciousPatterns = [
+          /javascript:/i,
+          /vbscript:/i,
+          /data:text\/html/i,
+          /on\w+\s*=/i, // onclick, onload, etc.
+        ];
+
+        return !suspiciousPatterns.some((pattern) => pattern.test(value));
+      },
     },
     length: {
       type: Number,
       default: 100,
+      validator: (value: number) => value > 0 && value <= 10000, // Ограничение на разумную длину
     },
     hideButton: {
       type: Boolean,
@@ -61,7 +97,7 @@ export default defineComponent({
     },
     sanitizeOptions: {
       type: Object as PropType<IOptions>,
-      default: undefined,
+      default: () => DEFAULT_SANITIZE_OPTIONS,
     },
   },
   emits: ['update:modelValue'],
@@ -73,24 +109,62 @@ export default defineComponent({
 
     const isHTML = computed(() => props.type === HTML);
 
-    const textLength = computed(() => {
-      const text = isHTML.value ? props.text.replace(/<[^>]*>/g, '') : props.text;
+    // Кешируем результат удаления HTML тегов для производительности
+    const plainText = computed(() => {
+      if (!isHTML.value) return props.text;
 
-      return text.length;
+      try {
+        // Более эффективное удаление HTML тегов с кешированием
+        return props.text.replace(/<[^>]*>/g, '').trim();
+      } catch {
+        return '';
+      }
     });
+
+    const textLength = computed(() => plainText.value.length);
 
     const showButton = computed(() => !props.hideButton && textLength.value > props.length);
 
-    const sanitizedHtmlOrText = computed(() => (isHTML.value
-      ? sanitizeHtml(props.text, props.sanitizeOptions)
-      : props.text));
-    const truncatedHtmlOrText = computed(() => (
-      isHTML.value
-        ? htmlTruncate(sanitizedHtmlOrText.value, props.length)
-        : sanitizedHtmlOrText.value.substring(0, props.length)
-    ));
+    // Всегда санитизируем контент, даже для текста (на случай если type изменится)
+    const sanitizedText = computed(() => {
+      try {
+        if (isHTML.value) {
+          return sanitizeHtml(props.text, props.sanitizeOptions);
+        }
 
-    const proxyText = computed(() => (isTruncated.value ? truncatedHtmlOrText.value : sanitizedHtmlOrText.value));
+        // Для текста применяем базовую санитизацию для защиты от XSS
+        return sanitizeHtml(props.text, {
+          allowedTags: [],
+          allowedAttributes: {},
+          disallowedTagsMode: 'escape',
+        });
+      } catch {
+        return '';
+      }
+    });
+
+    const truncatedContent = computed(() => {
+      try {
+        if (isHTML.value) {
+          return htmlTruncate(sanitizedText.value, props.length);
+        }
+
+        return sanitizedText.value.substring(0, props.length);
+      } catch {
+        return '';
+      }
+    });
+
+    const proxyText = computed(() => (isTruncated.value ? truncatedContent.value : sanitizedText.value));
+
+    // Дополнительная санитизация для v-html (двойная защита)
+    const sanitizedProxyText = computed(() => {
+      try {
+        return sanitizeHtml(proxyText.value, props.sanitizeOptions);
+      } catch {
+        return '';
+      }
+    });
 
     const buttonTitle = computed(() => (
       isTruncated.value
@@ -119,6 +193,7 @@ export default defineComponent({
       showButton,
       proxyButtonClass,
       proxyText,
+      sanitizedProxyText,
       buttonTitle,
       proxyClasses,
       toggle,
