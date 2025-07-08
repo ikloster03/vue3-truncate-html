@@ -2,8 +2,18 @@ import { mount } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import fs from 'fs';
 import path from 'path';
+import { execSync } from 'child_process';
 import VueTruncateHtml from './VueTruncateHtml.vue';
 import { PERFORMANCE_CONFIG, getThreshold } from './performance.config';
+
+function generateHtmlReport(): void {
+  try {
+    execSync('node scripts/performance-delta-report.js', { stdio: 'inherit' });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('⚠️  Failed to generate HTML delta report:', error);
+  }
+}
 
 interface PerformanceRun {
   runNumber: number;
@@ -377,20 +387,23 @@ function generateReport(results: PerformanceMetrics[]): void {
     })),
   };
 
+  // Calculate and generate delta report BEFORE writing new report
+  calculatePerformanceDelta(results);
+
+  // Generate HTML delta report automatically
+  generateHtmlReport();
+
   try {
     fs.writeFileSync(
       path.join(process.cwd(), 'performance-multi-report.json'),
       JSON.stringify(report, null, 2),
     );
     // eslint-disable-next-line no-console
-    console.log('�� Performance report generated: performance-multi-report.json');
+    console.log('📊 Performance report generated: performance-multi-report.json');
   } catch {
     // eslint-disable-next-line no-console
     console.log('⚠️  Failed to write performance report.');
   }
-
-  // Calculate and generate delta report
-  calculatePerformanceDelta(results);
 }
 
 // Test implementations
