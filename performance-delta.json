@@ -1,42 +1,42 @@
 {
   "summary": {
-    "previousScore": 97,
+    "previousScore": 98,
     "currentScore": 98,
-    "scoreDelta": 1,
-    "previousDuration": 5.834136472222216,
-    "currentDuration": 4.1021524305555594,
-    "durationDelta": -1.7319840416666565,
-    "timestamp": "2025-07-08T22:51:37.552Z"
+    "scoreDelta": 0,
+    "previousDuration": 4.1021524305555594,
+    "currentDuration": 4.13628815277778,
+    "durationDelta": 0.03413572222222072,
+    "timestamp": "2025-07-09T21:13:16.973Z"
   },
   "testDeltas": [
     {
       "testName": "Large HTML content processing",
       "category": "processing",
-      "previousTime": 5.138800124999989,
-      "currentTime": 3.397360374999991,
-      "timeDelta": -1.7414397499999978,
-      "previousPercentage": 5,
-      "currentPercentage": 3,
-      "percentageDelta": -2,
-      "status": "IMPROVED"
+      "previousTime": 3.397360374999991,
+      "currentTime": 3.9619218750000016,
+      "timeDelta": 0.5645615000000106,
+      "previousPercentage": 3,
+      "currentPercentage": 4,
+      "percentageDelta": 1,
+      "status": "SAME"
     },
     {
       "testName": "Large text content processing",
       "category": "processing",
-      "previousTime": 2.3513235000000634,
-      "currentTime": 1.7476813749999849,
-      "timeDelta": -0.6036421250000785,
-      "previousPercentage": 5,
+      "previousTime": 1.7476813749999849,
+      "currentTime": 1.7107503750000035,
+      "timeDelta": -0.036930999999981395,
+      "previousPercentage": 3,
       "currentPercentage": 3,
-      "percentageDelta": -2,
+      "percentageDelta": 0,
       "status": "SAME"
     },
     {
       "testName": "Multiple re-renders (10 toggles)",
       "category": "reactivity",
-      "previousTime": 1.0919986249999738,
-      "currentTime": 1.0739136249999603,
-      "timeDelta": -0.01808500000001345,
+      "previousTime": 1.0739136249999603,
+      "currentTime": 1.1266182500000355,
+      "timeDelta": 0.05270462500007511,
       "previousPercentage": 1,
       "currentPercentage": 1,
       "percentageDelta": 0,
@@ -45,20 +45,20 @@
     {
       "testName": "Computed properties reactivity",
       "category": "reactivity",
-      "previousTime": 2.110024750000008,
-      "currentTime": 1.2774606250000033,
-      "timeDelta": -0.8325641250000047,
-      "previousPercentage": 2,
+      "previousTime": 1.2774606250000033,
+      "currentTime": 1.3999748749999412,
+      "timeDelta": 0.12251424999993787,
+      "previousPercentage": 1,
       "currentPercentage": 1,
-      "percentageDelta": -1,
+      "percentageDelta": 0,
       "status": "SAME"
     },
     {
       "testName": "HTML sanitization overhead",
       "category": "sanitization",
-      "previousTime": 1.7456686250000075,
-      "currentTime": 1.6280719999999462,
-      "timeDelta": -0.1175966250000613,
+      "previousTime": 1.6280719999999462,
+      "currentTime": 1.6112277500000403,
+      "timeDelta": -0.01684424999990597,
       "previousPercentage": 1,
       "currentPercentage": 1,
       "percentageDelta": 0,
@@ -67,20 +67,20 @@
     {
       "testName": "Memory usage (20 components)",
       "category": "memory",
-      "previousTime": 24.07106724999997,
-      "currentTime": 16.05646637500007,
-      "timeDelta": -8.0146008749999,
-      "previousPercentage": 5,
+      "previousTime": 16.05646637500007,
+      "currentTime": 15.65594287499988,
+      "timeDelta": -0.4005235000001903,
+      "previousPercentage": 3,
       "currentPercentage": 3,
-      "percentageDelta": -2,
-      "status": "IMPROVED"
+      "percentageDelta": 0,
+      "status": "SAME"
     },
     {
       "testName": "Edge case: extremely long word",
       "category": "edge-case",
-      "previousTime": 1.4003232499999854,
-      "currentTime": 1.3340893749999907,
-      "timeDelta": -0.06623387499999467,
+      "previousTime": 1.3340893749999907,
+      "currentTime": 1.4592233750000219,
+      "timeDelta": 0.12513400000003116,
       "previousPercentage": 3,
       "currentPercentage": 3,
       "percentageDelta": 0,
@@ -89,24 +89,24 @@
     {
       "testName": "Concurrent component creation",
       "category": "processing",
-      "previousTime": 11.178265624999938,
-      "currentTime": 8.235486625000107,
-      "timeDelta": -2.942778999999831,
+      "previousTime": 8.235486625000107,
+      "currentTime": 8.023859000000073,
+      "timeDelta": -0.21162762500003396,
       "previousPercentage": 2,
       "currentPercentage": 2,
       "percentageDelta": 0,
-      "status": "IMPROVED"
+      "status": "SAME"
     },
     {
       "testName": "Complex HTML structure",
       "category": "processing",
-      "previousTime": 3.4197565000000054,
-      "currentTime": 2.168841499999985,
-      "timeDelta": -1.2509150000000204,
-      "previousPercentage": 2,
+      "previousTime": 2.168841499999985,
+      "currentTime": 2.277075000000025,
+      "timeDelta": 0.10823350000003984,
+      "previousPercentage": 1,
       "currentPercentage": 1,
-      "percentageDelta": -1,
-      "status": "IMPROVED"
+      "percentageDelta": 0,
+      "status": "SAME"
     }
   ]
 }
