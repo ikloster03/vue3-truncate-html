@@ -8,9 +8,9 @@ importers:
 
   .:
     dependencies:
-      html-truncate:
-        specifier: ^1.2.2
-        version: 1.2.2
+      html-truncate-ts:
+        specifier: ^0.1.3
+        version: 0.1.3
       sanitize-html:
         specifier: ^2.17.0
         version: 2.17.0
@@ -3146,8 +3146,9 @@ packages:
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
 
-  html-truncate@1.2.2:
-    resolution: {integrity: sha512-oiXb65RDxSYY8eXJKJiKHHpI7LyQbMG8LbSuvvWLLxAKNywJ7aaq0M1ynj2QJs0odQNggEEg/dTFVtH3lG0ClQ==}
+  html-truncate-ts@0.1.3:
+    resolution: {integrity: sha512-ULQgcn8UwVrwPTONr9P2Kfpk8aXFlUhqSvwpgiq5/njxLwVD0cLflsPUK1VdyckY2JK0Y4eOWF3FG2yLwpai1Q==}
+    engines: {node: '>=16.0.0'}
 
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
@@ -8742,7 +8743,7 @@ snapshots:
 
   html-escaper@2.0.2: {}
 
-  html-truncate@1.2.2: {}
+  html-truncate-ts@0.1.3: {}
 
   html-void-elements@3.0.0: {}
 

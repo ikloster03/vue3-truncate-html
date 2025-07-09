@@ -27,7 +27,7 @@ import {
   defineComponent,
   PropType,
 } from 'vue';
-import htmlTruncate from 'html-truncate';
+import { truncate } from 'html-truncate-ts';
 import { IOptions } from 'sanitize-html';
 import {
   Classes, Buttons, Type, ProcessedContent,
@@ -110,7 +110,7 @@ export default defineComponent({
 
       if (isTruncated.value) {
         if (isHTML) {
-          displayText = htmlTruncate(sanitizedText, props.length);
+          displayText = truncate(sanitizedText, props.length);
         } else {
           displayText = sanitizedText.substring(0, props.length);
         }
